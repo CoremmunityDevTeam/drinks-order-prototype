@@ -12,13 +12,13 @@ Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Di
 
 1. **Repository klonen oder Zip-Datei entpacken**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/CoremmunityDevTeam/drinks-order-prototype.git
    # oder entpacke die Zip-Datei in ein Verzeichnis deiner Wahl
    ```
 
 2. **In das Projektverzeichnis wechseln**
    ```bash
-   cd getraenke-bestellung
+   cd drinks-order-prototype
    ```
 
 3. **Abhängigkeiten installieren**
@@ -65,6 +65,4 @@ Die Anwendung verwendet eine SQLite-Datenbank (`getraenke.db`), die im Projektve
 - **GET /admin** - Liefert die Admin-Seite
 - **GET /api/all-orders** - Liefert alle Bestellungen (für die Admin-Seite)
 
-## Lizenz
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert.
