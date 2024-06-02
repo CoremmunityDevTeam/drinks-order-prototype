@@ -7,8 +7,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "bulma": "^0.9.3",
+    "bulma": "^1.0.1",
     "express": "^4.17.1",
+    "glob": "^10.4.1",
+    "inflight": "^1.0.6",
+    "rimraf": "^5.0.7",
     "sqlite3": "^5.0.2"
   },
   "author": "Core",

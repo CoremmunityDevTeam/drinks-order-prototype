@@ -1,5 +1,5 @@
 
-# Getränke-Bestellung
+# Drinks Order Prototype
 
 Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Die Anwendung ermöglicht es Benutzern, ihre Getränkebestellungen einzugeben, und bietet eine Admin-Seite zur Übersicht aller Bestellungen.
 
