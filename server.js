@@ -12,10 +12,23 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 // SQLite Verbindung
 const db = new sqlite3.Database('getraenke.db');
 
+// Passwort für Admin-Zugang
+const ADMIN_PASSWORD = 'CoreDev';
+
+// Route, um das Admin-Passwort zu überprüfen
+app.post('/api/check-password', (req, res) => {
+    const { password } = req.body;
+    if (password === ADMIN_PASSWORD) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
+});
+
 // Route, um alle Bestellungen eines Benutzers abzurufen
 app.get('/api/orders', (req, res) => {
     const name = req.query.name;
-    db.all('SELECT * FROM orders WHERE name = ?', [name], (err, rows) => {
+    db.all('SELECT drink, price, strftime("%d.%m.%Y %H:%M", created_at) as created_at FROM orders WHERE name = ?', [name], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -49,7 +62,7 @@ app.get('/admin', (req, res) => {
 
 // Route, um alle Bestellungen abzurufen (für Admin-Seite)
 app.get('/api/all-orders', (req, res) => {
-    db.all('SELECT * FROM orders', (err, rows) => {
+    db.all('SELECT name, drink, price, strftime("%d.%m.%Y %H:%M", created_at) as created_at FROM orders', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

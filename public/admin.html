@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section class="section">
+    <section class="section" id="adminSection" style="display: none;">
         <div class="container">
             <h1 class="title">Admin - Getränkebestellung</h1>
             <div class="field">
@@ -21,6 +21,7 @@
                         <th>Name</th>
                         <th>Getränk</th>
                         <th>Preis</th>
+                        <th>Datum</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,27 @@
             <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
         </div>
     </section>
+
+    <div class="modal" id="passwordModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Passwort erforderlich</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Passwort</label>
+                    <div class="control">
+                        <input class="input" type="password" id="adminPassword" placeholder="Passwort">
+                    </div>
+                </div>
+                <p id="error" class="help is-danger" style="display: none;">Falsches Passwort!</p>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="submitPassword">Bestätigen</button>
+            </footer>
+        </div>
+    </div>
 
     <script src="admin-script.js"></script>
 </body>

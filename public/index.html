@@ -37,7 +37,7 @@
                     <div class="column is-full-mobile">
                         <div class="field">
                             <div class="control" style="margin-top: 32px;">
-                                <button class="button is-primary is-fullwidth" type="submit">Bestellen</button>
+                                <button class="button is-primary is-fullwidth" type="submit" id="submitButton">Bestellen</button>
                             </div>
                         </div>
                     </div>
@@ -55,12 +55,14 @@
                     <tr>
                         <th>Getränk</th>
                         <th>Preis</th>
+                        <th>Datum</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Dynamisch gefüllte Zeilen -->
                 </tbody>
             </table>
+            <p id="totalAmount"><strong>Summe: 0.00 €</strong></p>
         </div>
     </section>
 
