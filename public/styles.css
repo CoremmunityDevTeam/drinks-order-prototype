@@ -1,0 +1,118 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#purchaseSection {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ffffff;
+}
+
+table thead {
+    background-color: #1f1f1f;
+}
+
+table tr:nth-child(even) {
+    background-color: #1f1f1f;
+}
+
+table tr:nth-child(odd) {
+    background-color: #2b2b2b;
+}
+
+table tr:hover {
+    background-color: #333333;
+}
+
+input, select {
+    color: #ffffff;
+    background-color: #333333;
+    border: 1px solid #ffffff;
+}
+
+input::placeholder {
+    color: #aaaaaa;
+}
+
+.button {
+    margin-top: 15px;
+}
+
+.field.is-horizontal .field-label {
+    align-self: center;
+}
+
+.field.is-horizontal .field-body {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+@media (max-width: 768px) {
+    .field.is-horizontal .field-label {
+        text-align: left;
+    }
+
+    .field.is-horizontal .field-body {
+        margin-top: 0;
+    }
+
+    .field.is-horizontal .field {
+        margin-bottom: 1rem;
+    }
+
+    .columns.is-mobile .column {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .button.is-fullwidth {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    input, select, .button {
+        font-size: 1rem;
+    }
+
+    table th, table td {
+        font-size: 0.875rem;
+    }
+
+    #orderTable {
+        margin-top: 20px;
+    }
+
+    #totalAmount {
+        font-size: 1rem;
+    }
+}
+
+.field.is-grouped {
+    display: flex;
+    align-items: center;
+}
+
+.field.is-grouped .control {
+    margin-right: 1rem;
+}
+
+#totalAmount {
+    margin-top: 20px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Getränkebestellung</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Admin - Getränkebestellung</h1>
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" id="nameFilter" placeholder="Filter nach Name" oninput="loadAllOrders()">
+                </div>
+            </div>
+            <table class="table is-fullwidth" id="adminOrderTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Getränk</th>
+                        <th>Preis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamisch gefüllte Zeilen -->
+                </tbody>
+            </table>
+            <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
+        </div>
+    </section>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

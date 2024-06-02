@@ -1,0 +1,16 @@
+{
+  "name": "getraenke-bestellung",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2"
+  },
+  "author": "Core",
+  "license": "ISC"
+}
