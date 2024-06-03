@@ -1,13 +1,7 @@
 document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const name = document.getElementById('name').value;
+    const name = document.getElementById('name').textContent;
     const drink = document.getElementById('drink').value.split(' ')[0];  // Get drink type only
-    
-    // Save name in Local Storage
-    localStorage.setItem('username', name);
-
-    // Disable name input field
-    document.getElementById('name').disabled = true;
 
     // Send data to the backend
     await fetch('/api/orders', {
@@ -26,37 +20,18 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
 });
 
 // Load stored name on page load
-window.onload = function() {
-    const storedName = localStorage.getItem('username');
-    if (storedName) {
-        document.getElementById('name').value = storedName;
-        document.getElementById('name').disabled = true;
-        document.getElementById('submitButton').disabled = false; // Enable submit button
-    } else {
-        document.getElementById('submitButton').disabled = true; // Disable submit button
+window.onload = async function() {
+    const response = await fetch('/api/get-username');
+    const data = await response.json();
+    if (data.username) {
+        document.getElementById('name').textContent = data.username;
     }
     loadOrders();
 };
 
-// Reset button functionality
-document.getElementById('resetButton').addEventListener('click', function() {
-    localStorage.removeItem('username');
-    document.getElementById('name').value = '';
-    document.getElementById('name').disabled = false;
-    document.getElementById('submitButton').disabled = true; // Disable submit button
-    const tbody = document.getElementById('orderTable').querySelector('tbody');
-    tbody.innerHTML = ''; // Clear the table
-});
-
-// Enable submit button when a name is entered
-document.getElementById('name').addEventListener('input', function() {
-    const name = document.getElementById('name').value;
-    document.getElementById('submitButton').disabled = name.trim() === ''; // Disable button if name is empty
-});
-
 // Load orders from the server
 async function loadOrders() {
-    const storedName = localStorage.getItem('username');
+    const storedName = document.getElementById('name').textContent;
     const response = await fetch(`/api/orders?name=${storedName}`);
     const orders = await response.json();
     const tbody = document.getElementById('orderTable').querySelector('tbody');

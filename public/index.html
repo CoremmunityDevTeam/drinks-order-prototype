@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Getränkebestellung</title>
+    <title>Coremmunity 2024</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -9,63 +9,46 @@
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Getränkebestellung</h1>
-            <form id="orderForm">
-                <div class="columns is-mobile is-multiline">
-                    <div class="column is-full-mobile">
-                        <div class="field">
-                            <label class="label">Name</label>
-                            <div class="control">
-                                <input class="input" type="text" id="name" placeholder="Name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-full-mobile">
-                        <div class="field">
-                            <label class="label">Getränk</label>
-                            <div class="control">
-                                <div class="select is-fullwidth">
-                                    <select id="drink">
-                                        <option value="Bier">Bier - 1.80€</option>
-                                        <option value="Softgetränk">Softgetränk - 2.50€</option>
-                                        <option value="Wasser">Wasser - 1.20€</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-full-mobile">
-                        <div class="field">
-                            <div class="control" style="margin-top: 32px;">
-                                <button class="button is-primary is-fullwidth" type="submit" id="submitButton">Bestellen</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-full-mobile">
-                        <div class="field">
-                            <div class="control" style="margin-top: 32px;">
-                                <button class="button is-warning is-fullwidth" type="button" id="resetButton">Benutzer zurücksetzen</button>
-                            </div>
-                        </div>
-                    </div>
+            <h1 class="title">Coremmunity 2024</h1>
+            <div class="columns">
+                <div class="column">
+                    <h2 class="subtitle">Login</h2>
+                    <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p>
+                    <a id="loginButton" class="button is-primary" href="/auth/twitch">Login with Twitch</a>
                 </div>
-            </form>
-            <table class="table is-fullwidth" id="orderTable">
-                <thead>
-                    <tr>
-                        <th>Getränk</th>
-                        <th>Preis</th>
-                        <th>Datum</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamisch gefüllte Zeilen -->
-                </tbody>
-            </table>
-            <p id="totalAmount"><strong>Summe: 0.00 €</strong></p>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <h2 class="subtitle">Events</h2>
+                    <ul id="eventList">
+                        <!-- Dummy events -->
+                        <li><strong>Event 1:</strong> 10:00 - 11:00</li>
+                        <li><strong>Event 2:</strong> 11:30 - 12:30</li>
+                        <li><strong>Event 3:</strong> 13:00 - 14:00</li>
+                    </ul>
+                </div>
+            </div>
+            <a class="button is-info is-fullwidth" id="orderButton" href="/order" style="display: none; margin-top: 10px;">Getränkebestellung</a>
+            <a class="button is-danger is-fullwidth" id="logoutButton" href="/logout" style="display: none; margin-top: 10px;">Logout</a>
+            <a class="button is-warning is-fullwidth" id="adminButton" href="/admin" style="display: none; margin-top: 10px;">Admin</a>
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script>
+        // Load stored name on page load
+        window.onload = async function() {
+            const response = await fetch('/api/get-username');
+            const data = await response.json();
+            if (data.username) {
+                document.getElementById('welcomeMessage').innerHTML = `Willkommen, ${data.username}`;
+                document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('orderButton').style.display = 'block';
+                document.getElementById('logoutButton').style.display = 'block';
+                document.getElementById('adminButton').style.display = 'block';
+            } else {
+                document.getElementById('orderButton').style.display = 'none';
+            }
+        };
+    </script>
 </body>
 </html>

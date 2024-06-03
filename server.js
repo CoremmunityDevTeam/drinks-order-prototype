@@ -17,7 +17,6 @@ passport.use(new TwitchStrategy({
     scope: 'user_read'
 },
 function(accessToken, refreshToken, profile, done) {
-    //TODO Save user information in session
     return done(null, profile);
 }));
 
@@ -43,8 +42,6 @@ app.use(session({
 // Initialize Passport and restore authentication state, if any, from the session
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 // SQLite Verbindung
 const db = new sqlite3.Database('getraenke.db');
@@ -108,7 +105,7 @@ app.get('/api/all-orders', (req, res) => {
     });
 });
 
-// Login & Twith authentication Route
+// Login & Twitch authentication Route
 app.get('/login', (req, res) => {
     res.send('<a href="/auth/twitch">Login with Twitch</a>');
 });
@@ -120,17 +117,34 @@ app.get('/auth/twitch/callback',
     passport.authenticate('twitch', { failureRedirect: '/' }),
     (req, res) => {
         // Successful authentication
-        res.redirect('/profile');
+        req.session.username = req.user.display_name;
+        res.redirect('/');
     });
 
-app.get('/profile', (req, res) => {
-        if (!req.isAuthenticated()) {
-            return res.redirect('/');
-        }
-        res.send(`<img src=${req.user.profile_image_url} style='width: 50px; border-radius: 45px; display: block;' /> ${req.user.display_name}`);
+// Route, um den Benutzernamen aus der Session zu holen
+app.get('/api/get-username', (req, res) => {
+    if (req.session.username) {
+        res.json({ username: req.session.username });
+    } else {
+        res.json({ username: null });
+    }
 });
-    
 
+// Route für Logout
+app.get('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.session.destroy();
+        res.redirect('/');
+    });
+});
+
+// Route für die Getränkebestellung
+app.get('/order', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/order.html'));
+});
 
 // Start des Servers
 app.listen(port, () => {
