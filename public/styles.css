@@ -1,11 +1,19 @@
 body {
     font-family: 'Arial', sans-serif;
-    color: #ffffff;
+    color: #654729; /* Textfarbe */
     padding: 10px;
+    background-color: #DFD1C2; /* Hintergrundfarbe */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .hidden {
     display: none;
+}
+
+.section {
+    flex: 1;
 }
 
 #purchaseSection {
@@ -23,24 +31,25 @@ table th, table td {
 }
 
 table thead {
-    background-color: #1f1f1f;
+    background-color: #A38463; /* Tabellenkopf Hintergrundfarbe */
 }
 
 table tr:nth-child(even) {
-    background-color: #1f1f1f;
+    background-color: #CFB9A1; /* Gerade Zeilen Hintergrundfarbe */
 }
 
 table tr:nth-child(odd) {
-    background-color: #2b2b2b;
+    background-color: #DFD1C2; /* Ungerade Zeilen Hintergrundfarbe */
 }
 
 table tr:hover {
-    background-color: #333333;
+    background-color: #654729; /* Hover-Effekt Hintergrundfarbe */
+    color: #ffffff; /* Textfarbe bei Hover */
 }
 
 input, select {
     color: #ffffff;
-    background-color: #333333;
+    background-color: #654729; /* Eingabefelder Hintergrundfarbe */
     border: 1px solid #ffffff;
 }
 
@@ -50,6 +59,44 @@ input::placeholder {
 
 .button {
     margin-top: 15px;
+    background-color: #6D5440; /* Button Hintergrundfarbe */
+    color: #ffffff; /* Button Textfarbe */
+}
+
+.button.is-primary {
+    background-color: #A38463; /* Primärer Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #ffffff; /* Primärer Button Textfarbe */
+}
+
+.button.is-link {
+    background-color: #DFD1C2; /* Link Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #654729; /* Link Button Textfarbe */
+}
+
+.button.is-info {
+    background-color: #654729; /* Info Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #ffffff; /* Info Button Textfarbe */
+}
+
+.button.is-success {
+    background-color: #CFB9A1; /* Erfolgs Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #654729; /* Erfolgs Button Textfarbe */
+}
+
+.button.is-warning {
+    background-color: #6D5440; /* Warnung Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #ffffff; /* Warnung Button Textfarbe */
+}
+
+.button.is-danger {
+    background-color: #654729; /* Gefährlich Button Hintergrundfarbe */
+    border-color: transparent;
+    color: #ffffff; /* Gefährlich Button Textfarbe */
 }
 
 .field.is-horizontal .field-label {
@@ -115,4 +162,65 @@ input::placeholder {
 
 #totalAmount {
     margin-top: 20px;
+}
+
+/* Dark Mode Unterstützung */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #2b2b2b;
+        color: #DFD1C2;
+    }
+
+    table thead {
+        background-color: #654729;
+    }
+
+    table tr:nth-child(even), table tr:nth-child(odd) {
+        background-color: #A38463;
+    }
+
+    table tr:hover {
+        background-color: #654729;
+        color: #ffffff;
+    }
+
+    input, select {
+        background-color: #A38463;
+        color: #DFD1C2;
+    }
+
+    .button {
+        background-color: #654729;
+        color: #ffffff;
+    }
+
+    .button.is-primary {
+        background-color: #DFD1C2;
+        color: #654729;
+    }
+
+    .button.is-link {
+        background-color: #654729;
+        color: #DFD1C2;
+    }
+
+    .button.is-info {
+        background-color: #CFB9A1;
+        color: #654729;
+    }
+
+    .button.is-success {
+        background-color: #6D5440;
+        color: #ffffff;
+    }
+
+    .button.is-warning {
+        background-color: #654729;
+        color: #ffffff;
+    }
+
+    .button.is-danger {
+        background-color: #CFB9A1;
+        color: #654729;
+    }
 }
