@@ -1,13 +1,50 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const passport = require('passport');
+const TwitchStrategy = require('passport-twitch-new').Strategy;
+const session = require('express-session');
 const path = require('path');
+require('dotenv').config()
+
 const app = express();
 const port = 3000;
+
+// Configure the Twitch strategy for Passport
+passport.use(new TwitchStrategy({
+    clientID: process.env.TWITCH_CLIENT_ID,
+    clientSecret: process.env.TWITCH_CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL,
+    scope: 'user_read'
+},
+function(accessToken, refreshToken, profile, done) {
+    //TODO Save user information in session
+    return done(null, profile);
+}));
+
+// Configure Passport authenticated session persistence
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
 
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+// Initialize Passport and restore authentication state, if any, from the session
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // SQLite Verbindung
 const db = new sqlite3.Database('getraenke.db');
@@ -70,6 +107,30 @@ app.get('/api/all-orders', (req, res) => {
         res.json(rows);
     });
 });
+
+// Login & Twith authentication Route
+app.get('/login', (req, res) => {
+    res.send('<a href="/auth/twitch">Login with Twitch</a>');
+});
+
+app.get('/auth/twitch',
+    passport.authenticate('twitch'));
+
+app.get('/auth/twitch/callback',
+    passport.authenticate('twitch', { failureRedirect: '/' }),
+    (req, res) => {
+        // Successful authentication
+        res.redirect('/profile');
+    });
+
+app.get('/profile', (req, res) => {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/');
+        }
+        res.send(`<img src=${req.user.profile_image_url} style='width: 50px; border-radius: 45px; display: block;' /> ${req.user.display_name}`);
+});
+    
+
 
 // Start des Servers
 app.listen(port, () => {

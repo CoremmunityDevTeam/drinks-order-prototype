@@ -31,6 +31,14 @@ Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Di
    ```bash
    node initializeDB.js
    ```
+5. **Twitch Authentication Integration**
+   Lege .env Config File mit den folgenden Werten an
+   ```
+   TWITCH_CLIENT_ID="<Client ID>"
+   TWITCH_CLIENT_SECRET ="<Client Secret>"
+   CALLBACK_URL="http://localhost:3000/auth/twitch/callback" 
+   SESSION_SECRET="<Custom Session Secret not from Twitch>"
+   ```
 
 ## Anwendung starten
 
