@@ -55,10 +55,19 @@ Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Di
 
 - `public/` - Enthält die statischen Dateien (HTML, CSS, JS)
   - `index.html` - Benutzeroberfläche für Getränkebestellungen
+  - `index_script.js` - JavaScript-Datei für die Startseite
   - `admin.html` - Admin-Oberfläche zur Übersicht aller Bestellungen
+  - `admin-script.js` - JavaScript-Datei für die Admin-Seite
   - `styles.css` - CSS-Datei für das Styling
-  - `script.js` - JavaScript-Datei für die Benutzeroberfläche
-  - `admin-script.js` - JavaScript-Datei für die Admin-Oberfläche
+  - `order.html` - Bestell Seite für Getränke
+  - `order-script.js` - JavaScript-Datei für die Bestell-Seite
+- `api/` - API Routen
+  - `routes.js` 
+- `auth/` 
+  - `config.js`
+  - `routes.js` - Authentifizierungsrouten
+- `datapase.js` -  Datenbankverbindung und -initialisierung.
+- `routes.js` 
 - `server.js` - Node.js-Server
 - `initializeDB.js` - Skript zur Initialisierung der SQLite-Datenbank
 - `package.json` - Listet die Projektabhängigkeiten und Skripte auf
