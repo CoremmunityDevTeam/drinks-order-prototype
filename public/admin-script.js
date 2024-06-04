@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitPasswordButton = document.getElementById('submitPassword');
     const adminPasswordInput = document.getElementById('adminPassword');
     const errorElement = document.getElementById('error');
+    const nameFilter = document.getElementById('nameFilter');
+    const orderList = document.getElementById('adminOrderTable').querySelector('tbody');
+    const totalAmount = document.getElementById('totalAmount');
     
     passwordModal.classList.add('is-active');
     
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             passwordModal.classList.remove('is-active');
             adminSection.style.display = 'block';
             loadAllOrders();
+            loadEvents();
         } else {
             errorElement.style.display = 'block';
         }
@@ -31,29 +35,60 @@ document.addEventListener('DOMContentLoaded', () => {
             submitPasswordButton.click();
         }
     });
-});
 
-async function loadAllOrders() {
-    const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
-    const response = await fetch('/api/all-orders');
-    const orders = await response.json();
-    const tbody = document.getElementById('adminOrderTable').querySelector('tbody');
-    const totalAmountElement = document.getElementById('totalAmount');
-    tbody.innerHTML = '';
+    nameFilter.addEventListener('input', loadAllOrders);
 
-    let total = 0;
-    const filteredOrders = orders.filter(order => order.name.toLowerCase().includes(nameFilter));
-    filteredOrders.forEach(order => {
-        total += order.price;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${order.name}</td>
-            <td>${order.drink}</td>
-            <td>${order.price.toFixed(2)} €</td>
-            <td>${order.created_at}</td>
-        `;
-        tbody.appendChild(tr);
+    async function loadAllOrders() {
+        const filter = nameFilter.value.toLowerCase();
+        const response = await fetch('/api/all-orders');
+        const orders = await response.json();
+        orderList.innerHTML = '';
+
+        let total = 0;
+        const filteredOrders = orders.filter(order => order.name.toLowerCase().includes(filter));
+        filteredOrders.forEach(order => {
+            total += order.price;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${order.name}</td>
+                <td>${order.drink}</td>
+                <td>${order.price.toFixed(2)} €</td>
+                <td>${order.created_at}</td>
+            `;
+            orderList.appendChild(tr);
+        });
+
+        totalAmount.innerHTML = `<strong>Gesamtsumme: ${total.toFixed(2)} €</strong>`;
+    }
+
+    document.getElementById('eventForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const title = document.getElementById('eventTitle').value;
+        const start_time = document.getElementById('eventStartTime').value;
+        const end_time = document.getElementById('eventEndTime').value;
+
+        await fetch('/api/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, start_time, end_time })
+        });
+
+        document.getElementById('eventForm').reset();
+        loadEvents();
     });
 
-    totalAmountElement.innerHTML = `<strong>Gesamtsumme: ${total.toFixed(2)} €</strong>`;
-}
+    async function loadEvents() {
+        const response = await fetch('/api/events');
+        const events = await response.json();
+        const eventList = document.getElementById('eventList');
+        eventList.innerHTML = '';
+
+        events.forEach(event => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${event.title}:</strong> ${event.start_time} - ${event.end_time}`;
+            eventList.appendChild(li);
+        });
+    }
+});

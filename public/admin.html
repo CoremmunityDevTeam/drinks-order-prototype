@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Getränkebestellung</title>
+    <title>Coremmunity 2024 - Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -30,6 +30,30 @@
             </table>
             <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
             <a class="button is-info" href="/">Zurück zur Hauptseite</a>
+            <h2 class="subtitle">Events hinzufügen</h2>
+            <form id="eventForm">
+                <div class="field">
+                    <label class="label">Titel</label>
+                    <div class="control">
+                        <input class="input" type="text" id="eventTitle" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Startzeit</label>
+                    <div class="control">
+                        <input class="input" type="datetime-local" id="eventStartTime" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Endzeit</label>
+                    <div class="control">
+                        <input class="input" type="datetime-local" id="eventEndTime" required>
+                    </div>
+                </div>
+                <div class="control">
+                    <button class="button is-primary" type="submit">Event hinzufügen</button>
+                </div>
+            </form>
         </div>
     </section>
 
