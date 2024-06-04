@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const db = require('../database').db;
+const db = require('../database');
 
 // Route, um das Admin-Passwort zu überprüfen
 router.post('/check-password', (req, res) => {
