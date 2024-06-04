@@ -38,6 +38,7 @@ Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Di
    TWITCH_CLIENT_SECRET ="<Client Secret>"
    CALLBACK_URL="http://localhost:3000/auth/twitch/callback" 
    SESSION_SECRET="<Custom Session Secret not from Twitch>"
+   ADMIN_PASSWORD="<Admin Passwort>"
    ```
 
 ## Anwendung starten
