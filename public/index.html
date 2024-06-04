@@ -4,6 +4,7 @@
     <title>Coremmunity 2024</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="/node_modules/bulma-timeline/dist/css/bulma-timeline.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
             <div class="columns">
                 <div class="column">
                     <h2 class="subtitle">Events</h2>
-                    <ul id="eventList">
+                    <ul id="eventList" class="timeline">
                         <!-- Event-Liste wird dynamisch gefüllt -->
                     </ul>
                 </div>
@@ -30,7 +31,6 @@
             <a class="button is-warning is-fullwidth" id="adminButton" href="/admin" style="display: none; margin-top: 10px;">Admin</a>
         </div>
     </section>
-
     <script src="index-script.js"></script>
 </body>
 </html>

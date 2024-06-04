@@ -1,13 +1,27 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const path = require('path');
 
-// Admin-Seite bereitstellen
-router.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/admin.html'));
+// Middleware zur Überprüfung der Authentifizierung
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/');
+}
+
+// Route für die Startseite
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Route für die Bestellung
+router.get('/order', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'order.html'));
 });
 
 // Route für Logout
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
     req.logout((err) => {
         if (err) {
             return next(err);
@@ -17,9 +31,9 @@ router.get('/logout', (req, res) => {
     });
 });
 
-// Route für die Getränkebestellung
-router.get('/order', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/order.html'));
+// Route für die Admin-Seite
+router.get('/admin', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 module.exports = router;

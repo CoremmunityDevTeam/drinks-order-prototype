@@ -164,6 +164,44 @@ input::placeholder {
     margin-top: 20px;
 }
 
+/* Timeline Styles */
+.timeline {
+    margin-top: 20px;
+}
+
+.timeline .timeline-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #654729;
+}
+
+.timeline .timeline-item {
+    padding-left: 0;
+}
+
+.timeline .timeline-marker {
+    background-color: #6D5440;
+    border: none;
+}
+
+
+
+.timeline .timeline-header, .timeline .timeline-date {
+    color: #654729;
+}
+
+.timeline .timeline-date {
+    background-color: #A38463;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #ffffff;
+}
+
+.tag.is-medium.is-primary {
+    background-color: #6D5440 !important; /* Anpassung der Tag-Farbe */
+    color: #ffffff !important;
+}
+
 /* Dark Mode Unterstützung */
 @media (prefers-color-scheme: dark) {
     body {
@@ -222,5 +260,18 @@ input::placeholder {
     .button.is-danger {
         background-color: #CFB9A1;
         color: #654729;
+    }
+    .timeline .timeline-marker {
+        background-color: #DFD1C2;
+    }
+
+
+
+    .timeline .timeline-header, .timeline .timeline-date {
+        color: #DFD1C2;
+    }
+
+    .timeline .timeline-date {
+        background-color: #6D5440;
     }
 }

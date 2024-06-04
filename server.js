@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const passport = require('passport');
 
 const app = express();
 const port = 3000;
@@ -16,8 +17,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use('/auth', require('./auth/routes'));
-app.use('/api', require('./api/routes'));
+// Passport initialisieren
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', require('./auth/auth-routes'));
+app.use('/api', require('./api/api-routes'));
 app.use('/', require('./routes'));
 
 // Start des Servers
