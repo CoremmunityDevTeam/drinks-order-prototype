@@ -11,7 +11,6 @@ router.post('/check-password', (req, res) => {
     }
 });
 
-
 // Route, um alle Bestellungen eines Benutzers abzurufen
 router.get('/orders', (req, res) => {
     const name = req.query.name;
@@ -60,6 +59,29 @@ router.get('/get-username', (req, res) => {
     } else {
         res.json({ username: null });
     }
+});
+
+// Route, um alle Events abzurufen
+router.get('/events', (req, res) => {
+    db.all('SELECT title, strftime("%d.%m.%Y %H:%M", start_time) as start_time, strftime("%d.%m.%Y %H:%M", end_time) as end_time FROM events', (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+// Route, um ein neues Event zu erstellen
+router.post('/events', (req, res) => {
+    const { title, start_time, end_time } = req.body;
+    db.run('INSERT INTO events (title, start_time, end_time) VALUES (?, ?, ?)', [title, start_time, end_time], function(err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.status(201).json({ id: this.lastID, title, start_time, end_time });
+    });
 });
 
 module.exports= router;
