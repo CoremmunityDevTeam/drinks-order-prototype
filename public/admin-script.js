@@ -67,12 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const start_time = document.getElementById('eventStartTime').value;
         const end_time = document.getElementById('eventEndTime').value;
 
+        // Konvertiere Datum und Uhrzeit in das ISO-Format (YYYY-MM-DDTHH:mm)
+        const formattedStartTime = new Date(start_time).toISOString();
+        const formattedEndTime = new Date(end_time).toISOString();
+
         await fetch('/api/events', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, start_time, end_time })
+            body: JSON.stringify({ title, start_time: formattedStartTime, end_time: formattedEndTime })
         });
 
         document.getElementById('eventForm').reset();
@@ -87,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         events.forEach(event => {
             const li = document.createElement('li');
-            li.innerHTML = `<strong>${event.title}:</strong> ${event.start_time} - ${event.end_time}`;
+            li.innerHTML = `<strong>${event.title}:</strong> ${new Date(event.start_time).toLocaleString()} - ${new Date(event.end_time).toLocaleString()}`;
             eventList.appendChild(li);
         });
     }

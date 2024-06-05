@@ -1,52 +1,88 @@
+/* Allgemeine Anpassungen */
 body {
     font-family: 'Arial', sans-serif;
-    color: #654729; /* Textfarbe */
-    padding: 10px;
     background-color: #DFD1C2; /* Hintergrundfarbe */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.hidden {
-    display: none;
+/* Header-Stil */
+.title.header {
+    background-color: #654729;  /* Dunkelbraune Farbe für den Header */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.section {
-    flex: 1;
+/* Abstände */
+.button {
+    margin-top: 15px;
 }
 
-#purchaseSection {
+.table-container {
     margin-top: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+#totalAmount {
+    margin-top: 20px;
 }
 
-table th, table td {
-    padding: 12px;
-    border: 1px solid #ffffff;
+/* Tabellenstile */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px; /* Abstand zwischen den Zeilen */
+    background-color: #2b2b2b; /* Tabellenhintergrundfarbe */
 }
 
-table thead {
-    background-color: #A38463; /* Tabellenkopf Hintergrundfarbe */
+.table th {
+    background-color: #654729;
+    color: #DFD1C2;
+    text-align: left;
+    padding: 10px;
 }
 
-table tr:nth-child(even) {
-    background-color: #CFB9A1; /* Gerade Zeilen Hintergrundfarbe */
+.table thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
-table tr:nth-child(odd) {
-    background-color: #DFD1C2; /* Ungerade Zeilen Hintergrundfarbe */
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
-table tr:hover {
-    background-color: #654729; /* Hover-Effekt Hintergrundfarbe */
-    color: #ffffff; /* Textfarbe bei Hover */
+.table td {
+    background-color: #A38463;
+    color: #DFD1C2;
+    padding: 10px;
+    border: none;
 }
 
+.table tbody tr {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table tbody tr td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table tbody tr td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.header {
+    background-color: #654729;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Eingabefelder */
 input, select {
     color: #ffffff;
     background-color: #654729; /* Eingabefelder Hintergrundfarbe */
@@ -57,12 +93,7 @@ input::placeholder {
     color: #aaaaaa;
 }
 
-.button {
-    margin-top: 15px;
-    background-color: #6D5440; /* Button Hintergrundfarbe */
-    color: #ffffff; /* Button Textfarbe */
-}
-
+/* Button-Farben */
 .button.is-primary {
     background-color: #A38463; /* Primärer Button Hintergrundfarbe */
     border-color: transparent;
@@ -99,37 +130,8 @@ input::placeholder {
     color: #ffffff; /* Gefährlich Button Textfarbe */
 }
 
-.field.is-horizontal .field-label {
-    align-self: center;
-}
-
-.field.is-horizontal .field-body {
-    flex-grow: 1;
-    flex-basis: 0;
-}
-
+/* Medienanfragen für Responsivität */
 @media (max-width: 768px) {
-    .field.is-horizontal .field-label {
-        text-align: left;
-    }
-
-    .field.is-horizontal .field-body {
-        margin-top: 0;
-    }
-
-    .field.is-horizontal .field {
-        margin-bottom: 1rem;
-    }
-
-    .columns.is-mobile .column {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-
-    .button.is-fullwidth {
-        width: 100%;
-    }
-
     .title {
         font-size: 1.5rem;
     }
@@ -138,30 +140,9 @@ input::placeholder {
         font-size: 1rem;
     }
 
-    table th, table td {
+    .table th, .table td {
         font-size: 0.875rem;
     }
-
-    #orderTable {
-        margin-top: 20px;
-    }
-
-    #totalAmount {
-        font-size: 1rem;
-    }
-}
-
-.field.is-grouped {
-    display: flex;
-    align-items: center;
-}
-
-.field.is-grouped .control {
-    margin-right: 1rem;
-}
-
-#totalAmount {
-    margin-top: 20px;
 }
 
 /* Timeline Styles */
@@ -183,8 +164,6 @@ input::placeholder {
     background-color: #6D5440;
     border: none;
 }
-
-
 
 .timeline .timeline-header, .timeline .timeline-date {
     color: #654729;
@@ -209,17 +188,13 @@ input::placeholder {
         color: #DFD1C2;
     }
 
-    table thead {
-        background-color: #654729;
-    }
-
-    table tr:nth-child(even), table tr:nth-child(odd) {
-        background-color: #A38463;
-    }
-
-    table tr:hover {
+    .table thead th {
         background-color: #654729;
         color: #ffffff;
+    }
+
+    .table td {
+        background-color: #A38463;
     }
 
     input, select {
@@ -261,11 +236,10 @@ input::placeholder {
         background-color: #CFB9A1;
         color: #654729;
     }
+
     .timeline .timeline-marker {
         background-color: #DFD1C2;
     }
-
-
 
     .timeline .timeline-header, .timeline .timeline-date {
         color: #DFD1C2;

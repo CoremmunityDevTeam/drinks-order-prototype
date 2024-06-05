@@ -15,8 +15,8 @@ db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS events (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
-        start_time TEXT NOT NULL,
-        end_time TEXT NOT NULL
+        start_time DATETIME NOT NULL,
+        end_time DATETIME NOT NULL
     )`);
 
     // Tabelle für Sessions

@@ -22,7 +22,8 @@ async function loadEvents() {
 
     // Group events by day
     const groupedEvents = events.reduce((acc, event) => {
-        const day = new Date(event.start_time).toLocaleDateString('de-DE', { weekday: 'long' });
+        const eventDate = new Date(Date.parse(event.start_time));
+        const day = eventDate.toLocaleDateString('de-DE', { weekday: 'long' });
         if (!acc[day]) acc[day] = [];
         acc[day].push(event);
         return acc;
@@ -36,12 +37,15 @@ async function loadEvents() {
         eventList.appendChild(dayHeader);
 
         groupedEvents[day].forEach(event => {
+            const startTime = new Date(Date.parse(event.start_time));
+            const endTime = new Date(Date.parse(event.end_time));
+
             const li = document.createElement('li');
             li.classList.add('timeline-item');
             li.innerHTML = `
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                    <p class="heading">${new Date(event.start_time).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${new Date(event.end_time).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p class="heading">${startTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${endTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>${event.title}</p>
                 </div>
             `;

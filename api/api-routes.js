@@ -22,7 +22,7 @@ router.post('/check-password', (req, res) => {
 // Route, um alle Bestellungen eines Benutzers abzurufen
 router.get('/orders', ensureAuthenticated, (req, res) => {
     const name = req.query.name;
-    db.all('SELECT drink, price, strftime("%d.%m.%Y %H:%M", created_at) as created_at FROM orders WHERE name = ?', [name], (err, rows) => {
+    db.all('SELECT drink, price, datetime(created_at) as created_at FROM orders WHERE name = ?', [name], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -51,7 +51,7 @@ router.post('/orders', ensureAuthenticated, (req, res) => {
 
 // Route, um alle Bestellungen abzurufen (für Admin-Seite)
 router.get('/all-orders', ensureAuthenticated, (req, res) => {
-    db.all('SELECT name, drink, price, strftime("%d.%m.%Y %H:%M", created_at) as created_at FROM orders', (err, rows) => {
+    db.all('SELECT name, drink, price, datetime(created_at) as created_at FROM orders', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -71,7 +71,7 @@ router.get('/get-username', (req, res) => {
 
 // Route, um alle Events abzurufen
 router.get('/events', (req, res) => {
-    db.all('SELECT title, strftime("%d.%m.%Y %H:%M", start_time) as start_time, strftime("%d.%m.%Y %H:%M", end_time) as end_time FROM events', (err, rows) => {
+    db.all('SELECT title, start_time, end_time FROM events', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
