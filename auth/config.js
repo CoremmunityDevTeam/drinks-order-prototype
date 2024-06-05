@@ -25,5 +25,6 @@ function initAuthentication(app) {
 }
 
 module.exports = {
-    initAuthentication
+    initAuthentication,
+    passport
 };
