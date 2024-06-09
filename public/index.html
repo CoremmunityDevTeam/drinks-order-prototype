@@ -8,29 +8,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section class="section">
-        <div class="container">
+    <div class="background-container"></div>    
+        <div class="menu-container" id="menuContainer">
             <h1 class="title">Coremmunity 2024</h1>
-            <div class="columns">
-                <div class="column">
-                    <h2 class="subtitle">Login</h2>
-                    <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p>
-                    <a id="loginButton" class="button is-primary" href="/auth/twitch">Login with Twitch</a>
-                </div>
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <h2 class="subtitle">Events</h2>
-                    <ul id="eventList" class="timeline is-centered">
-                        <!-- Event-Liste wird dynamisch gefüllt -->
-                    </ul>
-                </div>
-            </div>
-            <a class="button is-info is-fullwidth" id="orderButton" href="/order" style="display: none; margin-top: 10px;">Getränkebestellung</a>
-            <a class="button is-danger is-fullwidth" id="logoutButton" href="/logout" style="display: none; margin-top: 10px;">Logout</a>
-            <a class="button is-warning is-fullwidth" id="adminButton" href="/admin" style="display: none; margin-top: 10px;">Admin</a>
+            <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p> <!-- Hier wird der Benutzername eingefügt -->
+
+            <button id="menuEventsButton" class="button is-transparent">Events</button>
+            <a id="orderButton" class="button is-transparent" href="/order" style="display: none;">Bestellung</a>
+            <a id="logoutButton" class="button is-transparent" href="/logout" style="display: none;">Logout</a>
+            <a id="adminButton" class="button is-transparent" href="/admin" style="display: none;">Admin</a>
+            <a id="loginButton" class="button is-transparent" href="/auth/twitch">Login with Twitch</a>
         </div>
-    </section>
+
+        <div class="content-container" id="contentContainer" style="display: none;">
+            <section class="section" id="contentSection">         
+                <div class="columns" id="eventsSection" style="display: none;">
+                    <div class="column">                           
+                        <ul id="eventList" class="timeline">
+                            <!-- Event-Liste wird dynamisch gefüllt -->
+                        </ul>
+                    </div>                          
+                </div>
+                <h2 class="subtitle" id="sectionTitle" style="display: none;">Events</h2> <!-- Beibehaltung der Steuerung -->
+                <button class="button is-transparent back is-fullwidth" id="backButton" style="margin-top: 10px; display: none;">Zurück</button>
+            </section>          
+        </div>
     <script src="index-script.js"></script>
 </body>
 </html>
