@@ -75,6 +75,12 @@ body {
     border-bottom-right-radius: 10px;
 }
 
+/* Hinzufügen des Hover-Effekts */
+.table tbody tr:hover td {
+    background-color: #6D5440; /* Dunklerer Braunton für den Hover-Effekt */
+    color: #FFFFFF; /* Textfarbe ändern, falls nötig */
+}
+
 .header {
     background-color: #654729;
     padding: 20px;
