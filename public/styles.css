@@ -76,10 +76,7 @@ strong {
 
 
 
-    .table thead th {
-        background-color: #6D5440;
-        color: #ffffff;
-    }
+
 
     .table td {
         background-color: #A38463;
@@ -143,14 +140,15 @@ strong {
 .table {
     border-collapse: separate;
     border-spacing: 0 15px; /* Abstand zwischen den Zeilen */
-    background-color: #2b2b2b; /* Tabellenhintergrundfarbe */
+    /*background-color: #2b2b2b; /* Tabellenhintergrundfarbe */
+    background-color: transparent; /* Setzt die Hintergrundfarbe auf transparent */
+
 }
 
 .table th {
     background-color: #6D5440;
-    color: #DFD1C2;
-    text-align: left;
     padding: 10px;
+    border-color: transparent;
 }
 
 .table thead th:first-child {
@@ -165,7 +163,7 @@ strong {
 
 .table td {
     background-color: #A38463;
-    color: #DFD1C2;
+    color: #FFFFFF;
     padding: 10px;
     border: none;
 }
@@ -282,6 +280,7 @@ input::placeholder {
     z-index: 2;
     padding-top: 10px;
     padding-bottom: 10px;
+    top: 20%;
 }
 
 .menu-container .button {
@@ -305,7 +304,6 @@ input::placeholder {
     width: 100%;
     z-index: 2;
 }
-
 
 
 #contentSection {
