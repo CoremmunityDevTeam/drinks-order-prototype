@@ -3,6 +3,9 @@
 <head>
     <title>Coremmunity 2024</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/solid.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/brands.css">
     <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="/node_modules/bulma-timeline/dist/css/bulma-timeline.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -13,10 +16,32 @@
             <h1 class="title">Coremmunity 2024</h1>
             <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p> <!-- Hier wird der Benutzername eingefügt -->
             
-            <button id="menuEventsButton" class="button is-transparent">Events</button>
-            <a id="orderButton" class="button is-transparent" href="/order" style="display: none;">Bestellung</a>
-            <a id="logoutButton" class="button is-transparent" href="/logout" style="display: none;">Logout</a>
-            <a id="adminButton" class="button is-transparent" href="/admin" style="display: none;">Admin</a>
+            <button id="menuEventsButton" class="button is-transparent">
+                <span class="icon">
+                    <i class="fas fa-solid fa-calendar-days"></i>
+                </span>
+                <span> Events </span>  
+                
+            </button>
+            <a id="orderButton" class="button is-transparent" href="/order" style="display: none;">
+                <span class="icon">
+                    <i class="fas fa-solid fa-bottle-droplet"></i>
+                </span>    
+                <span> Bestellung </span> 
+                
+            </a>
+            <a id="logoutButton" class="button is-transparent" href="/logout" style="display: none;">
+                <span class="icon">
+                    <i class="fas fa-solid fa-right-from-bracket"></i>
+                </span>    
+                <span> Logout </span> 
+            </a>
+            <a id="adminButton" class="button is-transparent" href="/admin" style="display: none;">
+                <span class="icon">
+                    <i class="fas fa-solid fa-screwdriver-wrench"></i>
+                </span>    
+                <span> Admin </span> 
+            </a>
             <a id="loginButton" class="button is-transparent" href="/auth/twitch">Login with Twitch</a>
         </div>
 
