@@ -3,6 +3,9 @@
 <head>
     <title>Coremmunity 2024 - Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/solid.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/brands.css">
     <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -29,7 +32,12 @@
                 </tbody>
             </table>
             <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
-            <a class="button is-info is-fullwidth" href="/">Zurück zur Hauptseite</a>
+            <a class="button is-info is-fullwidth" href="/">                    
+                <span class="icon">
+                    <i class="fas fa-solid fa-circle-arrow-left"></i>
+                </span>
+                <span>Zurück zur Hauptseite</span>
+            </a>
             
             <h2 class="subtitle">Events hinzufügen</h2>
             <form id="eventForm">
@@ -52,7 +60,13 @@
                     </div>
                 </div>
                 <div class="control">
-                    <button class="button is-primary is-fullwidth" type="submit">Event hinzufügen</button>
+                    <button class="button is-primary is-fullwidth" type="submit">
+                        <span class="icon">
+                            <i class="fas fa-solid fa-circle-plus"></i>
+                        </span>
+                        <span>Event hinzufügen</span>
+                        
+                    </button>
                 </div>
             </form>
 
