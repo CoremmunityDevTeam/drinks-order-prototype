@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const db = require('../database');
+const env = require('dotenv').config();
 
 // Middleware zur Überprüfung der Authentifizierung
 function ensureAuthenticated(req, res, next) {
@@ -89,6 +90,17 @@ router.post('/events', ensureAuthenticated, (req, res) => {
             return;
         }
         res.status(201).json({ id: this.lastID, title, start_time, end_time });
+    });
+});
+
+router.get('/checkout', ensureAuthenticated, (req, res) => {
+    const name = req.session.username; 
+    db.get('SELECT sum(price) as total FROM orders WHERE name = ?', [name], (err, result) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.redirect(process.env.PAYPAL_LINK+ result['total']);
     });
 });
 
