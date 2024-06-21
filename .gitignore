@@ -131,6 +131,7 @@ dist
 
 # Sqlite3 DB
 getraenke.db
+sessions
 
 #Config file
 .env
