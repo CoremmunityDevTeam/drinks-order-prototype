@@ -9,6 +9,7 @@
   "dependencies": {
     "bulma": "^1.0.1",
     "bulma-timeline": "^3.0.5",
+    "connect-sqlite3": "^0.9.15",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",

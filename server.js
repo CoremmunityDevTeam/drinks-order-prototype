@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const { initAuthentication } = require('./auth/config');
-
+const SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
 const port = 3000;
 
@@ -14,7 +14,9 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new SQLiteStore,
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
 }));
 
 // Passport initialisieren
