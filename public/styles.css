@@ -287,7 +287,9 @@ input::placeholder {
     width: 80%;
 }
 
-
+.content-container .button {
+    margin: 0;
+}
 
 /* Blurry Animation */
 .background-container.blurry-bg {
@@ -304,6 +306,7 @@ input::placeholder {
     width: 100%;
     z-index: 2;
 }
+
 
 
 #contentSection {

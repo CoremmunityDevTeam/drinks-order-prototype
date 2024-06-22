@@ -80,20 +80,17 @@ document.addEventListener('DOMContentLoaded', function() {
         loadUsername(); // Benutzerinformationen neu laden
     }
 
-    document.getElementById('menuEventsButton').addEventListener('click', function() {
-        if (document.getElementById('contentContainer').style.display === 'none') {
-            showSection('Events', 'eventsSection');
-            loadEvents(); // Events laden, wenn der Events-Button geklickt wird
-            document.getElementById('menuEventsButton').innerText = 'Zurück';
-        } else {
-            hideSection();
-            document.getElementById('menuEventsButton').innerText = 'Events';
-        }
+    document.getElementById('eventsButton').addEventListener('click', function() {
+        showSection('Events', 'eventsSection');
+        loadEvents(); // Events laden, wenn der Events-Button geklickt wird
+        document.getElementById('eventsButton').style.display = 'none';
+        document.getElementById('backButton').style.display = 'block';
     });
 
     document.getElementById('backButton').addEventListener('click', function() {
         hideSection();
-        document.getElementById('menuEventsButton').innerText = 'Events';
+        document.getElementById('eventsButton').style.display = 'block';
+        document.getElementById('backButton').style.display = 'none';
     });
 
     loadEvents(); // Initiales Laden der Events beim Starten der Seite

@@ -12,61 +12,61 @@
 </head>
 <body>
     <div class="background-container"></div>    
-        <div class="menu-container" id="menuContainer">
-            <h1 class="title">Coremmunity 2024</h1>
-            <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p> <!-- Hier wird der Benutzername eingefügt -->
-            
-            <button id="menuEventsButton" class="button is-transparent">
+    <div class="menu-container" id="menuContainer">
+        <h1 class="title">Coremmunity 2024</h1>
+        <p id="welcomeMessage" class="is-size-4 has-text-weight-bold"></p> <!-- Hier wird der Benutzername eingefügt -->
+
+        <button id="eventsButton" class="button is-transparent">
+            <span class="icon">
+                <i class="fas fa-solid fa-calendar-days"></i>
+            </span>
+            <span> Events </span>  
+        </button>
+        <a id="orderButton" class="button is-transparent" href="/order">
+            <span class="icon">
+                <i class="fas fa-solid fa-bottle-droplet"></i>
+            </span>    
+            <span> Bestellung </span> 
+        </a>
+        <a id="adminButton" class="button is-transparent" href="/admin">
+            <span class="icon">
+                <i class="fas fa-solid fa-screwdriver-wrench"></i>
+            </span>    
+            <span> Admin </span> 
+        </a>
+
+        <a id="logoutButton" class="button is-transparent" href="/logout" >
+            <span class="icon">
+                <i class="fas fa-solid fa-right-from-bracket"></i>
+            </span>    
+            <span> Logout </span> 
+        </a>
+        <a id="loginButton" class="button is-transparent" href="/auth/twitch">
+            <span class="icon">
+                <i class="fas fa-brands fa-twitch"></i>
+            </span>    
+            <span> Login </span> 
+        </a>
+    </div>
+
+    <div class="content-container" id="contentContainer" style="display: none;">
+        <section class="section" id="contentSection">         
+            <div class="columns" id="eventsSection" >
+                <div class="column">                           
+                    <ul id="eventList" class="timeline is-centered">
+                        <!-- Event-Liste wird dynamisch gefüllt -->
+                    </ul>
+                </div>                          
+            </div>
+            <h2 class="subtitle" id="sectionTitle" style="display: none;">Events</h2> <!-- Beibehaltung der Steuerung -->
+            <button id="backButton" class="button is-transparent is-fullwidth" >
                 <span class="icon">
-                    <i class="fas fa-solid fa-calendar-days"></i>
+                    <i class="fas fa-solid fa-circle-arrow-left"></i>
                 </span>
-                <span> Events </span>  
+                <span>Zurück</span>  
             </button>
-            <a id="orderButton" class="button is-transparent" href="/order" style="display: none;">
-                <span class="icon">
-                    <i class="fas fa-solid fa-bottle-droplet"></i>
-                </span>    
-                <span> Bestellung </span> 
-            </a>
-            <a id="adminButton" class="button is-transparent" href="/admin" style="display: none;">
-                <span class="icon">
-                    <i class="fas fa-solid fa-screwdriver-wrench"></i>
-                </span>    
-                <span> Admin </span> 
-            </a>
-
-            <a id="logoutButton" class="button is-transparent" href="/logout" style="display: none;">
-                <span class="icon">
-                    <i class="fas fa-solid fa-right-from-bracket"></i>
-                </span>    
-                <span> Logout </span> 
-            </a>
-            <a id="loginButton" class="button is-transparent" href="/auth/twitch">
-                <span class="icon">
-                    <i class="fas fa-brands fa-twitch"></i>
-                </span>    
-                <span> Login </span> 
-            </a>
-        </div>
-
-        <div class="content-container" id="contentContainer" style="display: none;">
-            <section class="section" id="contentSection">         
-                <div class="columns" id="eventsSection" style="display: none;">
-                    <div class="column">                           
-                        <ul id="eventList" class="timeline is-centered">
-                            <!-- Event-Liste wird dynamisch gefüllt -->
-                        </ul>
-                    </div>                          
-                </div>
-                <h2 class="subtitle" id="sectionTitle" style="display: none;">Events</h2> <!-- Beibehaltung der Steuerung -->
-                <button class="button is-transparent back is-fullwidth" id="backButton" style="margin-top: 10px; display: none;">
-                    <span class="icon">
-                        <i class="fas fa-solid fa-circle-arrow-left"></i>
-                    </span>
-                    <span>Zurück</span>
-                </button>
-            </section>          
-        </div>
+        </section>          
+    </div>
     <script src="index-script.js"></script>
 </body>
 </html>
