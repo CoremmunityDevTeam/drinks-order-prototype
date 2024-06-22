@@ -62,10 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         eventList.appendChild(endLi);
     }
 
-    function showSection(title, sectionId) {
-        document.getElementById('sectionTitle').innerText = title;
-        document.getElementById('eventsSection').style.display = 'none';
-        document.getElementById(sectionId).style.display = 'block';
+    function showSection() {
         document.getElementById('contentContainer').style.display = 'block';
         document.querySelector('.background-container').classList.add('blurry-bg');
         document.querySelector('.menu-container').style.display = 'none';
@@ -81,16 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('eventsButton').addEventListener('click', function() {
-        showSection('Events', 'eventsSection');
+        showSection();
         loadEvents(); // Events laden, wenn der Events-Button geklickt wird
-        document.getElementById('eventsButton').style.display = 'none';
-        document.getElementById('backButton').style.display = 'block';
     });
 
     document.getElementById('backButton').addEventListener('click', function() {
         hideSection();
-        document.getElementById('eventsButton').style.display = 'block';
-        document.getElementById('backButton').style.display = 'none';
     });
 
     loadEvents(); // Initiales Laden der Events beim Starten der Seite
