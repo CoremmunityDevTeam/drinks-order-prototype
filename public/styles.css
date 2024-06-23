@@ -322,3 +322,11 @@ input::placeholder {
     color: black;
 }
 
+.activeTab {
+    display: block;
+}
+
+.hiddenTab  {
+    display: none;
+}
+

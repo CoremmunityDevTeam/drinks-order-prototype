@@ -95,4 +95,33 @@ document.addEventListener('DOMContentLoaded', () => {
             eventList.appendChild(li);
         });
     }
+    
+    function hideTab(el) {
+        el.classList.remove("activeTab");
+        el.classList.add("hiddenTab");
+    }
+
+    function showTab(el) {
+        el.classList.add("activeTab");
+        el.classList.remove("hiddenTab");
+    }
+    
+    function toggleActiveTab(el) {
+        document.querySelector(".tabs .is-active").classList.remove("is-active");
+        el.classList.add("is-active");
+    }
+
+    document.getElementById('eventsTabToogle').addEventListener('click', (el) => {
+        hideTab(document.querySelector(".activeTab"));
+        showTab(document.getElementById('eventContainer'));
+        toggleActiveTab(document.getElementById('eventsTabToogle'));
+
+    });
+
+    document.getElementById('orderTabToogle').addEventListener('click', (el) => {
+        hideTab(document.querySelector(".activeTab"));
+        showTab(document.getElementById('orderContainer'));
+        toggleActiveTab(document.getElementById('orderTabToogle'));
+    });
+
 });

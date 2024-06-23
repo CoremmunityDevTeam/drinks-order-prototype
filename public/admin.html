@@ -12,26 +12,29 @@
 <body>
     <section class="section" id="adminSection" style="display: none;">
         <div class="container">
-            <h1 class="title">Admin - Getränkebestellung</h1>
-            <div class="field">
-                <div class="control">
-                    <input class="input" type="text" id="nameFilter" placeholder="Filter nach Name" oninput="loadAllOrders()">
-                </div>
-            </div>
-            <table class="table is-fullwidth" id="adminOrderTable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Getränk</th>
-                        <th>Preis</th>
-                        <th>Datum</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamisch gefüllte Zeilen -->
-                </tbody>
-            </table>
-            <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
+            <div class="tabs is-large">
+                <ul>
+                    <li class="is-active" id="eventsTabToogle">
+                        <a>
+                            <span class="icon">
+                                <i class="fas fa-solid fa-calendar-days"></i>
+                            </span>
+                            <span>
+                                Events
+                            </span>
+                        </a>
+                    </li>
+                    <li id="orderTabToogle">
+                        <a>
+                            <span class="icon">
+                                <i class="fas fa-solid fa-bottle-droplet"></i>
+                            </span>    
+                            <span> Bestellung </span> 
+                        </a>
+                    </li>
+                </ul>
+            </div>          
+
             <a class="button is-info is-fullwidth" href="/">                    
                 <span class="icon">
                     <i class="fas fa-solid fa-circle-arrow-left"></i>
@@ -39,40 +42,64 @@
                 <span>Zurück zur Hauptseite</span>
             </a>
             
-            <h2 class="subtitle">Events hinzufügen</h2>
-            <form id="eventForm">
+            <div id="orderContainer" class="hiddenTab">
+                <h1 class="title">Admin - Getränkebestellung</h1>
                 <div class="field">
-                    <label class="label">Titel</label>
-                    <div class="control">
-                        <input class="input" type="text" id="eventTitle" required>
+                 <div class="control">
+                        <input class="input" type="text" id="nameFilter" placeholder="Filter nach Name" oninput="loadAllOrders()">
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">Startzeit</label>
-                    <div class="control">
-                        <input class="input" type="datetime-local" id="eventStartTime" required>
+                <table class="table is-fullwidth" id="adminOrderTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Getränk</th>
+                            <th>Preis</th>
+                            <th>Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamisch gefüllte Zeilen -->
+                    </tbody>
+                </table>
+                <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
+            </div>
+            
+            <div id="eventContainer" class="activeTab">
+                <h2 class="subtitle">Events hinzufügen</h2>
+                <form id="eventForm">
+                    <div class="field">
+                        <label class="label">Titel</label>
+                        <div class="control">
+                            <input class="input" type="text" id="eventTitle" required>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">Endzeit</label>
-                    <div class="control">
-                        <input class="input" type="datetime-local" id="eventEndTime" required>
+                    <div class="field">
+                        <label class="label">Startzeit</label>
+                        <div class="control">
+                            <input class="input" type="datetime-local" id="eventStartTime" required>
+                        </div>
                     </div>
-                </div>
-                <div class="control">
-                    <button class="button is-primary is-fullwidth" type="submit">
-                        <span class="icon">
-                            <i class="fas fa-solid fa-circle-plus"></i>
-                        </span>
-                        <span>Event hinzufügen</span>
-                        
-                    </button>
-                </div>
-            </form>
+                    <div class="field">
+                        <label class="label">Endzeit</label>
+                        <div class="control">
+                            <input class="input" type="datetime-local" id="eventEndTime" required>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary is-fullwidth" type="submit">
+                            <span class="icon">
+                                <i class="fas fa-solid fa-circle-plus"></i>
+                            </span>
+                            <span>Event hinzufügen</span>
+                        </button>
+                    </div>
+                </form>
 
-            <h2 class="subtitle">Events</h2>
-            <ul id="eventList"></ul> <!-- Hier wird die Event-Liste dynamisch gefüllt -->
-        </div>
+                <h2 class="subtitle">Events</h2>
+                <ul id="eventList"></ul> <!-- Hier wird die Event-Liste dynamisch gefüllt -->
+            </div>
+        </div>    
     </section>
 
     <div class="modal" id="passwordModal">
