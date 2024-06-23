@@ -67,6 +67,26 @@
                 </div>
                 <p id="totalAmount"><strong>Summe: 0.00 €</strong></p><br>
 
+                <div class="modal" id="orderConfirmation">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                          <p class="modal-card-title">Bestellbestätigung</p>
+                          <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                          <span id="confirmationText"></span><br>
+                        </section>
+                        <footer class="modal-card-foot">
+                          <div class="buttons">
+                            <button class="button is-success" id="orderConfirmationButton">Abschließen</button>
+                            <button class="button is-warning close">Abbrechen</button>
+                          </div>
+                        </footer>
+                      </div>
+                </div>
+
+
                 <a id="checkout" class="button is-success is-fullwidth" href="/api/checkout" target="_blank">
                     <span class="icon">
                         <i class="fas fa-brands fa-paypal"></i>

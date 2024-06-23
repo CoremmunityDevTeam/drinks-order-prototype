@@ -1,5 +1,41 @@
+const orderModal = document.getElementById('orderConfirmation');
+
 document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    openModal(orderModal);
+});
+
+
+(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+});
+
+document.getElementById('orderConfirmationButton').addEventListener('click', () => {
+    placeOrder();
+    closeModal(orderModal)
+});
+
+
+
+function openModal($el) {
+    $el.classList.add('is-active');
+    const drink = document.getElementById('drink').value.split(' ')[0];
+    const modalText = document.getElementById('confirmationText');
+
+    modalText.innerHTML = 'Ein '+ drink + ' wird hinzugefügt';
+
+  }
+
+
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+async function placeOrder() {
     const name = document.getElementById('name').textContent;
     const drink = document.getElementById('drink').value.split(' ')[0];  // Get drink type only
 
@@ -17,7 +53,8 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
 
     // Reload the table data
     loadOrders();
-});
+}
+
 
 // Load stored name on page load
 window.onload = async function() {
@@ -27,6 +64,8 @@ window.onload = async function() {
         document.getElementById('name').textContent = data.username;
     }
     loadOrders();
+
+
 };
 
 // Load orders from the server
