@@ -1,0 +1,19 @@
+{
+    "name": "Coremmunity 2024",
+    "start_url": "http://localhost:3000/",
+    "display": "fullscreen",
+    "prefer_related_applications" : false,
+    "icons": [
+      {
+        "src": "icons/512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "icons/192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ]
+}
+  
