@@ -347,3 +347,18 @@ input::placeholder {
 .stickyAmount  {
     margin-top: 5px;
 }
+
+.eventListContainer {
+    margin-top: 20px;
+}
+
+.card-content {
+    height: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.activeCard {
+    height: 100%;
+    padding: 15px 5px;
+}

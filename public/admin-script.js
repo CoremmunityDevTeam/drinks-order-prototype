@@ -124,4 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleActiveTab(document.getElementById('orderTabToogle'));
     });
 
+    document.querySelectorAll('.card-header').forEach((el) => {
+        el.addEventListener("click", () => {
+            const cardContent = el.parentElement.children[1];
+            
+            if (cardContent.classList.contains('activeCard')) {
+                cardContent.classList.remove("activeCard");
+            }else {
+                cardContent.classList.add("activeCard");
+            }
+        });
+    });        
+
 });
