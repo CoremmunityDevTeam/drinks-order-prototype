@@ -324,9 +324,26 @@ input::placeholder {
 
 .activeTab {
     display: block;
+    margin-top: 25px;
 }
 
 .hiddenTab  {
     display: none;
 }
 
+#orderContainer  {
+    height: calc(100vh - 200px);
+}
+
+.scrollable-container {
+    overflow-y: scroll;
+    height: 70%;
+}
+
+.section {
+    height: 100vh;
+}
+
+.stickyAmount  {
+    margin-top: 5px;
+}
