@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminPasswordInput = document.getElementById('adminPassword');
     const errorElement = document.getElementById('error');
     const nameFilter = document.getElementById('nameFilter');
-    const orderList = document.getElementById('adminOrderTable').querySelector('tbody');
+    const orderList = document.getElementById('adminOrderTable');
     const totalAmount = document.getElementById('totalAmount');
     
     passwordModal.classList.add('is-active');
@@ -48,14 +48,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const filteredOrders = orders.filter(order => order.name.toLowerCase().includes(filter));
         filteredOrders.forEach(order => {
             total += order.price;
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${order.name}</td>
-                <td>${order.drink}</td>
-                <td>${order.price.toFixed(2)} €</td>
-                <td>${order.created_at}</td>
+            const orderContainer = document.createElement('div');
+            orderContainer.classList.add('card');
+
+            const orderDate = Intl.DateTimeFormat('de-DE', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(order.created_at));
+            orderContainer.innerHTML = `
+                    <header class="card-header">
+                        <p class="card-header-title">${order.name} ${order.drink} - ${orderDate}</p>
+                        <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </header>
+                    <div class="card-content">
+                        <button class="button remove is-small is-danger" data-id="${order._id}">Löschen</button>
+                    </div>
             `;
-            orderList.appendChild(tr);
+            orderContainer.addEventListener('click', () => {
+                activateCard(orderContainer.children[0]);
+            });
+
+            orderContainer.querySelector("button.remove").addEventListener('click', () => {
+                console.log("Delete order");
+                //TODO Call delete order API
+            });
+
+            orderList.appendChild(orderContainer);
         });
 
         totalAmount.innerHTML = `<strong>Gesamtsumme: ${total.toFixed(2)} €</strong>`;
@@ -124,15 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleActiveTab(document.getElementById('orderTabToogle'));
     });
 
-    document.querySelectorAll('.card-header').forEach((el) => {
-        el.addEventListener("click", () => {
-            const cardContent = el.parentElement.children[1];
+    function activateCard(el){
+        const cardContent = el.parentElement.children[1];
             
             if (cardContent.classList.contains('activeCard')) {
                 cardContent.classList.remove("activeCard");
             }else {
                 cardContent.classList.add("activeCard");
-            }
+        }
+    }
+
+    document.querySelectorAll('.card-header').forEach((el) => {
+        el.addEventListener("click", () => {
+            activateCard(el);
         });
     });        
 
