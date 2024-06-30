@@ -59,6 +59,36 @@
                 <div class="stickyAmount">
                     <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
                 </div>
+
+                <div class="modal" id="orderDeletetionModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                          <p class="modal-card-title">Bestellung löschen</p>
+                          <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                          <span id="orderDeletionText"></span><br>
+                        </section>
+                        <footer class="modal-card-foot">
+                          <div class="buttons">
+                            <button class="button is-success" id="orderDeletetionConfirmation">
+                                <span class="icon">
+                                    <i class="fas fa-solid fa-cart-shopping"></i>
+                                </span>
+                                <span> Löschen </span>    
+                            </button>
+                            <button class="button is-warning close">
+                                <span class="icon">
+                                    <i class="fas fa-solid fa-xmark"></i>
+                                </span>
+                                <span>Abbrechen</span>
+                            </button>
+                          </div>
+                        </footer>
+                      </div>
+                </div>
+
             </div>
             
             <div id="eventContainer" class="activeTab">

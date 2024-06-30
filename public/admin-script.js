@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const filter = nameFilter.value.toLowerCase();
         const response = await fetch('/api/all-orders');
         const orders = await response.json();
+        const orderDeletionModal = document.getElementById('orderDeletetionModal');
+
         orderList.innerHTML = '';
 
         let total = 0;
@@ -51,10 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const orderContainer = document.createElement('div');
             orderContainer.classList.add('card');
 
-            const orderDate = Intl.DateTimeFormat('de-DE', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(order.created_at));
             orderContainer.innerHTML = `
                     <header class="card-header">
-                        <p class="card-header-title">${order.name} ${order.drink} - ${orderDate}</p>
+                        <p class="card-header-title">${order.name} ${order.drink} - ${convertOrderDate(order)}</p>
                         <button class="card-header-icon" aria-label="more options">
                             <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -70,8 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             orderContainer.querySelector("button.remove").addEventListener('click', () => {
-                console.log("Delete order");
-                //TODO Call delete order API
+                openOrderModal(orderDeletionModal, order);
             });
 
             orderList.appendChild(orderContainer);
@@ -157,6 +157,53 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener("click", () => {
             activateCard(el);
         });
-    });        
+    });     
+    
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+    
+        $close.addEventListener('click', () => {
+          closeModal($target);
+        });
+    });
+
+
+
+
+function openOrderModal($el, order) {
+    $el.classList.add('is-active');
+    const modalText = document.getElementById('orderDeletionText');
+    modalText.innerHTML = `Möchtest du die ${order.drink} Bestellung von ${order.name} um ${convertOrderDate(order)} wirklich löschen`;
+    
+    const deletionConfirmationButton = document.getElementById('orderDeletetionConfirmation');
+    deletionConfirmationButton.addEventListener("click", () => {
+        deleteOrder(order);
+        closeModal($el);
+    });
+}
+
+async function deleteOrder(order) {
+    const response = await fetch(`/api/orders/${order.id}`, {
+        method:"DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+
+    if (response.status === 204){
+        loadAllOrders();   
+    }    
+}    
+
+
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+
+function convertOrderDate(order) {
+    return Intl.DateTimeFormat('de-DE', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(order.created_at)); 
+}
 
 });

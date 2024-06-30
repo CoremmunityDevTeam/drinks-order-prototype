@@ -52,13 +52,23 @@ router.post('/orders', ensureAuthenticated, (req, res) => {
 
 // Route, um alle Bestellungen abzurufen (für Admin-Seite)
 router.get('/all-orders', ensureAuthenticated, (req, res) => {
-    db.all('SELECT name, drink, price, datetime(created_at) as created_at FROM orders', (err, rows) => {
+    db.all('SELECT id, name, drink, price, datetime(created_at) as created_at FROM orders', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json(rows);
     });
+});
+
+router.delete('/orders/:id', ensureAuthenticated, (req, res) => {
+    db.run('DELETE FROM orders WHERE id =?', [req.params.id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+         }
+        res.sendStatus(204);
+     });
 });
 
 // Route, um den Benutzernamen aus der Session zu holen
