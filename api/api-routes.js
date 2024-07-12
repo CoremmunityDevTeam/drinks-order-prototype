@@ -91,7 +91,29 @@ router.get('/get-username', (req, res) => {
 });
 
 // Route, um alle Events abzurufen
+router.get('/events/date', (req,res) => {
+    db.all("SELECT distinct STRFTIME('%d.%m.%Y', start_time) as date, STRFTIME('%d-%m-%Y', start_time) as search FROM events order by start_time asc", (err, rows) => {
+        if (err){
+            res.status(500).json({error: err.message})
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+router.get('/events/date/:date', (req, res) => {
+    db.all(`SELECT id, title, start_time, end_time FROM events WHERE STRFTIME('%d-%m-%Y', start_time) = '${req.params.date}' order by start_time asc`, (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+
 router.get('/events', (req, res) => {
+    
     db.all('SELECT id, title, start_time, end_time FROM events', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });

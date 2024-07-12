@@ -368,3 +368,7 @@ input::placeholder {
     overflow: scroll;
     margin: 5px 0px;
 }
+
+.eventDatesContainer {
+    margin-bottom: 25px;
+}

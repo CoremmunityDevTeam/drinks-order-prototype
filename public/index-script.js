@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+    function switchEventDate(tab, date) {
+       activeTab =  document.querySelector('li.is-active');
+       activeTab.classList.remove('is-active');
+       tab.classList.add('is-active');
+    }
+    
     async function loadUsername() {
         const response = await fetch('/api/get-username');
         const data = await response.json();
@@ -23,9 +30,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     loadUsername();
+    loadEventDates()
 
-    async function loadEvents() {
-        const response = await fetch('/api/events');
+    async function loadEventDates() {
+        const response = await fetch('/api/events/date');
+        const dates = await response.json();
+        dates.sort();
+        const eventDateTabs = document.getElementById('event-dates');
+        eventDateTabs.innerHTML = '';
+        dates.forEach(date => {
+            const tab = document.createElement('li');
+            tab.innerHTML = `<a><span>${date.date}</span></a>`;
+            eventDateTabs.appendChild(tab);
+            tab.addEventListener('click', () => {
+                switchEventDate(tab,date);
+                loadEventsForDate(date.search)
+            });
+        });
+        eventDateTabs.children[0].classList.add('is-active')
+        loadEventsForDate(dates[0].search)
+    }
+    
+
+
+    async function loadEventsForDate(date){
+        const response = await fetch(`api/events/date/${date}`);
         const events = await response.json();
         const eventList = document.getElementById('eventList');
         eventList.innerHTML = '';
@@ -84,12 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('eventsButton').addEventListener('click', function() {
         showSection();
-        loadEvents(); // Events laden, wenn der Events-Button geklickt wird
     });
 
     document.getElementById('backButton').addEventListener('click', function() {
         hideSection();
     });
-
-    loadEvents(); // Initiales Laden der Events beim Starten der Seite
 });
