@@ -331,7 +331,7 @@ input::placeholder {
     display: none;
 }
 
-#orderContainer  {
+#orderContainer, #eventContainer  {
     height: calc(100vh - 200px);
 }
 

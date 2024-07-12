@@ -73,12 +73,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch('/api/events');
         const events = await response.json();
         const eventList = document.getElementById('eventList');
+        const eventDeletionModal = document.getElementById('eventDeletetionModal');
         eventList.innerHTML = '';
 
         events.forEach(event => {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${event.title}:</strong> ${new Date(event.start_time).toLocaleString()} - ${new Date(event.end_time).toLocaleString()}`;
-            eventList.appendChild(li);
+            const eventContainer = document.createElement('div');
+            eventContainer.classList.add('card');
+
+            eventContainer.innerHTML = `
+                    <header class="card-header">
+                        <p class="card-header-title">${event.title} ${new Date(event.start_time).toLocaleString()} - ${new Date(event.end_time).toLocaleString()}</p>
+                        <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </header>
+                    <div class="card-content">
+                        <button class="button remove is-small is-danger" data-id="${event._id}">Löschen</button>
+                    </div>
+            `;
+            eventContainer.addEventListener('click', () => {
+                activateCard(eventContainer.children[0]);
+            });
+
+            eventContainer.querySelector("button.remove").addEventListener('click', () => {
+                openEventModal(eventDeletionModal, event);
+            });
+            eventList.appendChild(eventContainer);
         });
     }
     
@@ -134,7 +156,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
+    function openEventModal($el, event) {
+        $el.classList.add('is-active');
+        const modalText = document.getElementById('eventDeletionText');
+        modalText.innerHTML = `Möchtest du das Event ${event.title} von ${new Date(event.start_time).toLocaleString()} bis ${new Date(event.end_time).toLocaleString()} wirklich löschen`;
+        
+        const deletionConfirmationButton = document.getElementById('eventDeletetionConfirmation');
+        deletionConfirmationButton.addEventListener("click", () => {
+            deleteEvent(event);
+            closeModal($el);
+        });
+    }
 
 
 function openOrderModal($el, order) {
@@ -148,6 +180,20 @@ function openOrderModal($el, order) {
         closeModal($el);
     });
 }
+
+async function deleteEvent(event) {
+    const response = await fetch(`/api/events/${event.id}`, {
+        method:"DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+
+    if (response.status === 204){
+        loadEvents();   
+    }    
+}    
 
 async function deleteOrder(order) {
     const response = await fetch(`/api/orders/${order.id}`, {

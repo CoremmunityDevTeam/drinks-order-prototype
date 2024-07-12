@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow: hidden;">
 <head>
     <title>Coremmunity 2024 - Admin</title>
     <link rel="manifest" href="manifest.json" />
@@ -53,7 +53,6 @@
                 <div class="scrollable-container">
                     <div id="adminOrderTable">
                             <!-- Dynamisch gefüllte Zeilen -->
-                    </table>
                     </div>
                 </div>
                 <div class="stickyAmount">
@@ -133,10 +132,40 @@
                     </div>
 
                   </div>               
-                
-                <div class="eventListContainer">
-                    <h1 class="title">Events</h1>
-                    <ul id="eventList"></ul> <!-- Hier wird die Event-Liste dynamisch gefüllt -->
+                  <h1 class="title">Events</h1>
+                  <div class="scrollable-container">
+                    <div id="eventList">
+                        <!-- Dynamisch gefüllte Zeilen -->
+                    </div>
+
+                    <div class="modal" id="eventDeletetionModal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                              <p class="modal-card-title">Event löschen</p>
+                              <button class="delete" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                              <span id="eventDeletionText"></span><br>
+                            </section>
+                            <footer class="modal-card-foot">
+                              <div class="buttons">
+                                <button class="button is-success" id="eventDeletetionConfirmation">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-cart-shopping"></i>
+                                    </span>
+                                    <span> Löschen </span>    
+                                </button>
+                                <button class="button is-warning close">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-xmark"></i>
+                                    </span>
+                                    <span>Abbrechen</span>
+                                </button>
+                              </div>
+                            </footer>
+                          </div>
+                    </div>
                 </div>
             </div>
         </div>    

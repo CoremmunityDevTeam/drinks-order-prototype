@@ -92,7 +92,7 @@ router.get('/get-username', (req, res) => {
 
 // Route, um alle Events abzurufen
 router.get('/events', (req, res) => {
-    db.all('SELECT title, start_time, end_time FROM events', (err, rows) => {
+    db.all('SELECT id, title, start_time, end_time FROM events', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -111,6 +111,16 @@ router.post('/events', ensureAdmin, (req, res) => {
         }
         res.status(201).json({ id: this.lastID, title, start_time, end_time });
     });
+});
+
+router.delete('/events/:id', ensureAdmin, (req, res) => {
+    db.run('DELETE FROM events WHERE id =?', [req.params.id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+         }
+        res.sendStatus(204);
+     });
 });
 
 router.get('/checkout', ensureAuthenticated, (req, res) => {
