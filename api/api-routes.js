@@ -1,13 +1,23 @@
 const router = require('express').Router();
 const db = require('../database');
-const env = require('dotenv').config();
 
+
+function isAdminUser(req)  { 
+    return process.env.ADMIN_USERS.split(',').includes(req.session.username) 
+}
 // Middleware zur Überprüfung der Authentifizierung
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
     res.redirect('/');
+}
+
+function ensureAdmin(req, res, next){
+    if (req.isAuthenticated() && isAdminUser(req)) {
+        return next();
+    }
+    res.status(403).send('Access denied');
 }
 
 // Route, um das Admin-Passwort zu überprüfen
@@ -51,7 +61,7 @@ router.post('/orders', ensureAuthenticated, (req, res) => {
 });
 
 // Route, um alle Bestellungen abzurufen (für Admin-Seite)
-router.get('/all-orders', ensureAuthenticated, (req, res) => {
+router.get('/all-orders', ensureAdmin, (req, res) => {
     db.all('SELECT id, name, drink, price, datetime(created_at) as created_at FROM orders', (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -61,7 +71,7 @@ router.get('/all-orders', ensureAuthenticated, (req, res) => {
     });
 });
 
-router.delete('/orders/:id', ensureAuthenticated, (req, res) => {
+router.delete('/orders/:id', ensureAdmin, (req, res) => {
     db.run('DELETE FROM orders WHERE id =?', [req.params.id], function (err) {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -74,7 +84,7 @@ router.delete('/orders/:id', ensureAuthenticated, (req, res) => {
 // Route, um den Benutzernamen aus der Session zu holen
 router.get('/get-username', (req, res) => {
     if (req.session.username) {
-        res.json({ username: req.session.username });
+        res.json({ username: req.session.username, admin: isAdminUser(req) });
     } else {
         res.json({ username: null });
     }
@@ -92,7 +102,7 @@ router.get('/events', (req, res) => {
 });
 
 // Route, um ein neues Event zu erstellen
-router.post('/events', ensureAuthenticated, (req, res) => {
+router.post('/events', ensureAdmin, (req, res) => {
     const { title, start_time, end_time } = req.body;
     db.run('INSERT INTO events (title, start_time, end_time) VALUES (?, ?, ?)', [title, start_time, end_time], function (err) {
         if (err) {
@@ -113,5 +123,7 @@ router.get('/checkout', ensureAuthenticated, (req, res) => {
         res.redirect(process.env.PAYPAL_LINK+ result['total']);
     });
 });
+
+
 
 module.exports = router;

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('orderButton').style.display = 'block';
             document.getElementById('logoutButton').style.display = 'block';
-            document.getElementById('adminButton').style.display = 'block';
+            
         } else {
             document.getElementById('welcomeMessage').innerHTML = '';
             document.getElementById('loginButton').style.display = 'block';
@@ -15,8 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logoutButton').style.display = 'none';
             document.getElementById('adminButton').style.display = 'none';
         }
-    }
 
+        if(data.admin){
+            document.getElementById('adminButton').style.display = 'block';
+        } else {
+            document.getElementById('adminButton').style.display = 'none';
+        }
+    }
     loadUsername();
 
     async function loadEvents() {

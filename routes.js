@@ -10,6 +10,17 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/');
 }
 
+function isAdminUser(req)  { 
+    return process.env.ADMIN_USERS.split(',').includes(req.session.username) 
+}
+
+function ensureAdmin(req, res, next){
+    if (req.isAuthenticated() && isAdminUser(req)) {
+        return next();
+    }
+    res.redirect('/');
+}
+
 // Route für die Startseite
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -32,7 +43,7 @@ router.get('/logout', (req, res, next) => {
 });
 
 // Route für die Admin-Seite
-router.get('/admin', ensureAuthenticated, (req, res) => {
+router.get('/admin', ensureAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
