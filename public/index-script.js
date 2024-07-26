@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
        activeTab =  document.querySelector('li.is-active');
        activeTab.classList.remove('is-active');
        tab.classList.add('is-active');
+       tab.scrollIntoView({behavior: "smooth", inline: "center"});
     }
     
     async function loadUsername() {
@@ -38,7 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
         dates.sort();
         const eventDateTabs = document.getElementById('event-dates');
         eventDateTabs.innerHTML = '';
-        dates.forEach(date => {
+
+        const dateFormat = {year: 'numeric', month: '2-digit', day: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('DE-de',dateFormat);
+        var hasCurrentDate = false;
+        dates.sort().forEach(date => {
             const tab = document.createElement('li');
             tab.innerHTML = `<a><span>${date.date}</span></a>`;
             eventDateTabs.appendChild(tab);
@@ -46,9 +51,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 switchEventDate(tab,date);
                 loadEventsForDate(date.search)
             });
+            if(currentDate == date.date){
+                tab.classList.add('is-active');
+                loadEventsForDate(dates[0].search)
+                hasCurrentDate = true;
+            }
         });
-        eventDateTabs.children[0].classList.add('is-active')
-        loadEventsForDate(dates[0].search)
+
+        if(!hasCurrentDate) {
+            eventDateTabs.children[0].classList.add('is-active')
+            loadEventsForDate(dates[0].search)
+        }
+
+        
     }
     
 
@@ -113,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('eventsButton').addEventListener('click', function() {
         showSection();
+        document.querySelector('li.is-active').scrollIntoView({ inline: 'center' });
     });
 
     document.getElementById('backButton').addEventListener('click', function() {

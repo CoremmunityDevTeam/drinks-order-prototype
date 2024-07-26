@@ -372,3 +372,23 @@ input::placeholder {
 .eventDatesContainer {
     margin-bottom: 25px;
 }
+
+.tabs li.is-active {
+    background-color: #CFB9A1;
+    border-radius: var(--bulma-radius);
+}
+
+.tabs li.is-active a {
+    color: #654729;
+    border-bottom-color:#654729;
+    font-weight: bold;
+}
+
+.tabs li {
+    border-bottom: 0px;
+    margin-bottom: 5px;
+}
+
+.tabs li a {
+    border-bottom: 0px;
+}
