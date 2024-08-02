@@ -318,6 +318,15 @@ input::placeholder {
     padding-top: 20px;
 }
 
+#sponsorSection {
+    background-color: rgba(0, 0, 0, 0.6); /* Schwarzer Hintergrund mit Durchsichtigkeit */
+    height: inherit;
+    position: fixed;
+    top: 50%;
+    transform: translate(0%, -50%);
+    width: 100%;
+}
+
 #confirmationText {
     color: black;
 }
@@ -394,6 +403,20 @@ input::placeholder {
     color: hsl(220, 2%, 73%);
 }
 
+.modal-card-body strong{
+    color : black;
+}
+
+.modal-card-body {
+    color : black;
+}
 a {
     color:inherit;
+}
+
+#sponsorSection .button {
+    width: 100%;
+}
+#sponsorBackButton {
+    margin-top : 30px;
 }
