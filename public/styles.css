@@ -1,4 +1,9 @@
 /* Allgemeine Anpassungen  */
+
+:root {
+    --bulma-scheme-main: white;
+}
+
 body, html {
     height: 100%;
     margin: 0;
@@ -391,8 +396,4 @@ input::placeholder {
 
 .tabs li a {
     border-bottom: 0px;
-}
-
-.modal-card-body {
-    background-color: white;
 }
