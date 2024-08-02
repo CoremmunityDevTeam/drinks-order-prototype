@@ -1,6 +1,6 @@
-require('dotenv').config();
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname + "/.env") });
 const express = require('express');
-const path = require('path');
 const session = require('express-session');
 const { initAuthentication } = require('./auth/config');
 const SQLiteStore = require('connect-sqlite3')(session);
