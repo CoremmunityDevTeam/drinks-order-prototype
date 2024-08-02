@@ -1,11 +1,4 @@
 /* Allgemeine Anpassungen  */
-
-:root {
-    --bulma-scheme-main: white;
-    --bulma-scheme-main-bis: white;
-    --bulma-text-strong: black;
-}
-
 body, html {
     height: 100%;
     margin: 0;
