@@ -1,10 +1,14 @@
 const orderModal = document.getElementById('orderConfirmation');
+const checkoutConfirmation = document.getElementById('checkoutConfirmation');
 
 document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     openModal(orderModal);
 });
 
+document.getElementById('checkout').addEventListener('click', () => {
+    openModal(checkoutConfirmation);
+});
 
 (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
     const $target = $close.closest('.modal');

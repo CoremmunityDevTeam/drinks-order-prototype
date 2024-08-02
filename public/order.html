@@ -97,8 +97,42 @@
                       </div>
                 </div>
 
+                <div class="modal" id="checkoutConfirmation">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                          <p class="modal-card-title">Getränke bezahlen</p>
+                          <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                          <strong>Möchtest du deine gesamten Getränkebestellungen bezahlen?</strong>
+                          <br>
+                          <br>
+                          <span>Dies ist erst am Ende des Core Treffens nötig, bzw. am letzen Besuchstag für Tagesgäste.</span><br>
+                        </section>
+                        <footer class="modal-card-foot">
+                          <div class="buttons">
+                            <button class="button is-success">
+                                <a href="/api/checkout" target="_blank" class="noLink">
+                                    <span class="icon">
+                                        <i class="fas fa-brands fa-paypal"></i>
+                                    </span>
+                                    <span>Mit PayPal bezahlen</span>    
+                                </a>
+                            </button>
+                            <button class="button is-warning close">
+                                <span class="icon">
+                                    <i class="fas fa-solid fa-xmark"></i>
+                                </span>
+                                <span>Zurück</span>
+                            </button>
+                          </div>
+                        </footer>
+                      </div>
+                </div>
 
-                <a id="checkout" class="button is-success is-fullwidth" href="/api/checkout" target="_blank">
+
+                <a id="checkout" class="button is-success is-fullwidth">
                     <span class="icon">
                         <i class="fas fa-brands fa-paypal"></i>
                     </span>

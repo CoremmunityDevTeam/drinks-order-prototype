@@ -392,3 +392,7 @@ input::placeholder {
 .tabs li a {
     border-bottom: 0px;
 }
+
+a {
+    color:inherit;
+}
