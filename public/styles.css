@@ -391,6 +391,7 @@ input::placeholder {
 
 .tabs li a {
     border-bottom: 0px;
+    color: hsl(220, 2%, 73%);
 }
 
 a {
