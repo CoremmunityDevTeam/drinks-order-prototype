@@ -33,7 +33,7 @@ router.post('/check-password', (req, res) => {
 // Route, um alle Bestellungen eines Benutzers abzurufen
 router.get('/orders', ensureAuthenticated, (req, res) => {
     const name = req.query.name;
-    db.all('SELECT drink, price, datetime(created_at) as created_at FROM orders WHERE name = ?', [name], (err, rows) => {
+    db.all("SELECT drink, price, datetime(created_at,'localtime') as created_at FROM orders WHERE name = ?", [name], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -62,7 +62,7 @@ router.post('/orders', ensureAuthenticated, (req, res) => {
 
 // Route, um alle Bestellungen abzurufen (für Admin-Seite)
 router.get('/all-orders', ensureAdmin, (req, res) => {
-    db.all('SELECT id, name, drink, price, datetime(created_at) as created_at FROM orders', (err, rows) => {
+    db.all("SELECT id, name, drink, price, datetime(created_at,'localtime') as created_at FROM orders", (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

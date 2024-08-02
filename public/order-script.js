@@ -19,7 +19,9 @@ document.getElementById('orderConfirmationButton').addEventListener('click', () 
     closeModal(orderModal)
 });
 
-
+function convertOrderDate(order) {
+    return Intl.DateTimeFormat('de-DE', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(order.created_at)); 
+}
 
 function openModal($el) {
     $el.classList.add('is-active');
@@ -80,11 +82,12 @@ async function loadOrders() {
     let total = 0;
     orders.reverse().forEach(order => {  // Reverse the order of orders
         total += order.price;
+        console.log(order)
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${order.drink}</td>
             <td>${order.price.toFixed(2)} €</td>
-            <td>${order.created_at}</td>
+            <td>${convertOrderDate(order)}</td>
         `;
         tbody.appendChild(tr);
     });
