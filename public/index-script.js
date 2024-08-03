@@ -134,17 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('eventsButton').addEventListener('click', function() {
         showSection('contentContainer');
         document.querySelector('li.is-active').scrollIntoView({ inline: 'center' });
-    });
-
-    document.getElementById('sponsorButton').addEventListener('click', function() {
-        showSection('sponsorContainer');
-    });
-
-    document.getElementById('sponsorBackButton').addEventListener('click', function() {
-        hideSection('sponsorContainer');
-    });
-
-    
+    });    
 
     document.getElementById('backButton').addEventListener('click', function() {
         hideSection('contentContainer');
