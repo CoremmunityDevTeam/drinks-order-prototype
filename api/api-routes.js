@@ -26,7 +26,7 @@ async function isRegisteredUser(req)  {
     if(!req) {
         return false;
     }
-    return await isUserOfType(req.session.username, 'Angemeldeter Besucher')
+    return await isUserOfType(req.session.username, 'Angemeldeter Besucher:in')
 }
 
 // Middleware zur Überprüfung der Authentifizierung
@@ -55,6 +55,10 @@ async function ensureAdmin(req, res, next){
 //        res.json({ success: false });
 //    }
 //});
+
+router.get('/accessCode', ensureAuthenticated, (req, res) => {
+    res.json({accessCode: process.env.ACCESS_CODE});
+});
 
 // Route, um alle Bestellungen eines Benutzers abzurufen
 router.get('/orders', ensureAuthenticated, (req, res) => {
