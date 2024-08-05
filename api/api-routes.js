@@ -1,20 +1,44 @@
 const router = require('express').Router();
 const db = require('../database');
 
-
-function isAdminUser(req)  { 
-    return process.env.ADMIN_USERS.split(',').includes(req.session.username) 
+async function isUserOfType(user_name, type) {
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT user_name FROM users WHERE user_name = ? AND user_kind = ?`, [user_name, type], (err, rows) => {
+            if(err) {
+                reject();
+            }
+            if(rows.length > 0) {
+                resolve(true);
+            }
+            resolve(false);
+        })
+    })
 }
+
+async function isAdminUser(req)  {
+    if(!req) {
+        return false;
+    }
+    return await isUserOfType(req.session.username, 'Administrator');
+}
+
+async function isRegisteredUser(req)  {
+    if(!req) {
+        return false;
+    }
+    return await isUserOfType(req.session.username, 'Angemeldeter Besucher')
+}
+
 // Middleware zur Überprüfung der Authentifizierung
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
+async function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated() && (await isRegisteredUser() || await isAdminUser(req))) {
         return next();
     }
     res.redirect('/');
 }
 
-function ensureAdmin(req, res, next){
-    if (req.isAuthenticated() && isAdminUser(req)) {
+async function ensureAdmin(req, res, next){
+    if (req.isAuthenticated() && await isAdminUser(req)) {
         return next();
     }
     res.status(403).send('Access denied');
@@ -84,9 +108,9 @@ router.delete('/orders/:id', ensureAdmin, (req, res) => {
 });
 
 // Route, um den Benutzernamen aus der Session zu holen
-router.get('/get-username', (req, res) => {
+router.get('/get-username', async (req, res) => {
     if (req.session.username) {
-        res.json({ username: req.session.username, admin: isAdminUser(req) });
+        res.json({ username: req.session.username, admin: await isAdminUser(req), registeredUser: await isRegisteredUser(req)});
     } else {
         res.json({ username: null });
     }
@@ -145,6 +169,38 @@ router.delete('/events/:id', ensureAdmin, (req, res) => {
          }
         res.sendStatus(204);
      });
+});
+
+
+router.get('/users', (req, res) => {
+    db.all('SELECT id, user_name, user_kind FROM users', (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+router.post('/users', ensureAdmin, (req, res) => {
+    const { user_name, user_kind } = req.body;
+    db.run('INSERT INTO users (user_name, user_kind) VALUES (?, ?)', [user_name, user_kind], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.status(201).json({ id: this.lastID, user_name, user_kind });
+    });
+});
+
+router.delete('/users/:id', ensureAdmin, (req, res) => {
+    db.run('DELETE FROM users WHERE id =?', [req.params.id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.sendStatus(204);
+    });
 });
 
 router.get('/checkout', ensureAuthenticated, (req, res) => {

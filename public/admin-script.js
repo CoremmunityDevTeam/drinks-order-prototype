@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameFilter = document.getElementById('nameFilter');
     const orderList = document.getElementById('adminOrderTable');
     const totalAmount = document.getElementById('totalAmount');
-    
+
     nameFilter.addEventListener('input', loadAllOrders);
 
     async function loadAllOrders() {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalAmount.innerHTML = `<strong>Gesamtsumme: ${total.toFixed(2)} €</strong>`;
     }
 
-    document.getElementById('eventForm').addEventListener('submit', async function(e) {
+    document.getElementById('eventForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const title = document.getElementById('eventTitle').value;
         const start_time = document.getElementById('eventStartTime').value;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, start_time: formattedStartTime, end_time: formattedEndTime })
+            body: JSON.stringify({title, start_time: formattedStartTime, end_time: formattedEndTime})
         });
 
         document.getElementById('eventForm').reset();
@@ -103,7 +103,59 @@ document.addEventListener('DOMContentLoaded', () => {
             eventList.appendChild(eventContainer);
         });
     }
-    
+
+    document.getElementById('userForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user_name = document.getElementById('userNameInput').value;
+        const user_kind = document.getElementById('userKindInput').value;
+
+        await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({user_name, user_kind})
+        });
+
+        document.getElementById('eventForm').reset();
+        loadUsers();
+    });
+
+    async function loadUsers() {
+        const response = await fetch('/api/users');
+        const users = await response.json();
+        const userList = document.getElementById('userList');
+        const userDeletionModal = document.getElementById('userDeletetionModal');
+        userList.innerHTML = '';
+
+        users.forEach(user => {
+            const userContainer = document.createElement('div');
+            userContainer.classList.add('card');
+
+            userContainer.innerHTML = `
+                    <header class="card-header">
+                        <p class="card-header-title">Name: ${user.user_name} Typ: ${user.user_kind}</p>
+                        <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </header>
+                    <div class="card-content">
+                        <button class="button remove is-small is-danger" data-id="${user._id}">Löschen</button>
+                    </div>
+            `;
+            userContainer.addEventListener('click', () => {
+                activateCard(userContainer.children[0]);
+            });
+
+            userContainer.querySelector("button.remove").addEventListener('click', () => {
+                openUserModal(userDeletionModal, user);
+            });
+            userList.appendChild(userContainer);
+        });
+    }
+
     function hideTab(el) {
         el.classList.remove("activeTab");
         el.classList.add("hiddenTab");
@@ -113,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add("activeTab");
         el.classList.remove("hiddenTab");
     }
-    
+
     function toggleActiveTab(el) {
         document.querySelector(".tabs .is-active").classList.remove("is-active");
         el.classList.add("is-active");
@@ -132,13 +184,19 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleActiveTab(document.getElementById('orderTabToogle'));
     });
 
-    function activateCard(el){
+    document.getElementById('userTabToogle').addEventListener('click', (el) => {
+        hideTab(document.querySelector(".activeTab"));
+        showTab(document.getElementById('userContainer'));
+        toggleActiveTab(document.getElementById('userTabToogle'));
+    });
+
+    function activateCard(el) {
         const cardContent = el.parentElement.children[1];
-            
-            if (cardContent.classList.contains('activeCard')) {
-                cardContent.classList.remove("activeCard");
-            }else {
-                cardContent.classList.add("activeCard");
+
+        if (cardContent.classList.contains('activeCard')) {
+            cardContent.classList.remove("activeCard");
+        } else {
+            cardContent.classList.add("activeCard");
         }
     }
 
@@ -146,13 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener("click", () => {
             activateCard(el);
         });
-    });     
-    
+    });
+
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
         const $target = $close.closest('.modal');
-    
+
         $close.addEventListener('click', () => {
-          closeModal($target);
+            closeModal($target);
         });
     });
 
@@ -160,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $el.classList.add('is-active');
         const modalText = document.getElementById('eventDeletionText');
         modalText.innerHTML = `Möchtest du das Event ${event.title} von ${new Date(event.start_time).toLocaleString()} bis ${new Date(event.end_time).toLocaleString()} wirklich löschen`;
-        
+
         const deletionConfirmationButton = document.getElementById('eventDeletetionConfirmation');
         deletionConfirmationButton.addEventListener("click", () => {
             deleteEvent(event);
@@ -169,57 +227,86 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-function openOrderModal($el, order) {
-    $el.classList.add('is-active');
-    const modalText = document.getElementById('orderDeletionText');
-    modalText.innerHTML = `Möchtest du die ${order.drink} Bestellung von ${order.name} um ${convertOrderDate(order)} wirklich löschen`;
-    
-    const deletionConfirmationButton = document.getElementById('orderDeletetionConfirmation');
-    deletionConfirmationButton.addEventListener("click", () => {
-        deleteOrder(order);
-        closeModal($el);
-    });
-}
+    function openOrderModal($el, order) {
+        $el.classList.add('is-active');
+        const modalText = document.getElementById('orderDeletionText');
+        modalText.innerHTML = `Möchtest du die ${order.drink} Bestellung von ${order.name} um ${convertOrderDate(order)} wirklich löschen?`;
 
-async function deleteEvent(event) {
-    const response = await fetch(`/api/events/${event.id}`, {
-        method:"DELETE",
-        headers:{
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        const deletionConfirmationButton = document.getElementById('orderDeletetionConfirmation');
+        deletionConfirmationButton.addEventListener("click", () => {
+            deleteOrder(order);
+            closeModal($el);
+        });
+    }
+
+    function openUserModal($el, user) {
+        $el.classList.add('is-active');
+        const modalText = document.getElementById('userDeletionText');
+        modalText.innerHTML = `Möchtest du den/die Bentzer:in ${user.user_name} wirklich löschen?`;
+
+        const deletionConfirmationButton = document.getElementById('userDeletetionConfirmation');
+        deletionConfirmationButton.addEventListener("click", async () => {
+            await deleteUser(user);
+            closeModal($el);
+        });
+    }
+
+    async function deleteEvent(event) {
+        const response = await fetch(`/api/events/${event.id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (response.status === 204) {
+            loadEvents();
         }
-    });
+    }
 
-    if (response.status === 204){
-        loadEvents();   
-    }    
-}    
+    async function deleteOrder(order) {
+        const response = await fetch(`/api/orders/${order.id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
 
-async function deleteOrder(order) {
-    const response = await fetch(`/api/orders/${order.id}`, {
-        method:"DELETE",
-        headers:{
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        if (response.status === 204) {
+            loadAllOrders();
         }
-    });
+    }
 
-    if (response.status === 204){
-        loadAllOrders();   
-    }    
-}    
-
-
-function closeModal($el) {
-    $el.classList.remove('is-active');
-}
-
-
-function convertOrderDate(order) {
-    return Intl.DateTimeFormat('de-DE', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(order.created_at)); 
-}
+    async function deleteUser(user) {
+        const response = await fetch(`/api/users/${user.id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (response.status === 204) {
+            loadUsers();
+        }
+    }
 
 
-loadAllOrders();
-loadEvents();
+    function closeModal($el) {
+        $el.classList.remove('is-active');
+    }
+
+
+    function convertOrderDate(order) {
+        return Intl.DateTimeFormat('de-DE', {
+            dateStyle: 'short',
+            timeStyle: 'short'
+        }).format(new Date(order.created_at));
+    }
+
+
+    loadAllOrders();
+    loadEvents();
+    loadUsers();
 });

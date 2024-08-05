@@ -10,12 +10,22 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadUsername() {
         const response = await fetch('/api/get-username');
         const data = await response.json();
+
+        if(data.username && !(data.registeredUser || data.admin)) {
+            document.getElementById('welcomeMessage').innerHTML = `Nicht zugelassener Benutzer`;
+            document.getElementById('loginButton').style.display = 'none';
+            document.getElementById('orderButton').style.display = 'none';
+            document.getElementById('adminButton').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'block';
+            return;
+        }
+
+
         if (data.username) {
             document.getElementById('welcomeMessage').innerHTML = `Willkommen, ${data.username}`;
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('orderButton').style.display = 'block';
             document.getElementById('logoutButton').style.display = 'block';
-            
         } else {
             document.getElementById('welcomeMessage').innerHTML = '';
             document.getElementById('loginButton').style.display = 'block';
