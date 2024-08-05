@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             orderContainer.innerHTML = `
                     <header class="card-header">
-                        <p class="card-header-title">${order.name} ${order.drink} - ${convertOrderDate(order)}</p>
+                        <p class="card-header-title">${order.name}: ${order.drink}<br>${convertOrderDate(order)}</p>
                         <button class="card-header-icon" aria-label="more options">
                             <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             eventContainer.innerHTML = `
                     <header class="card-header">
-                        <p class="card-header-title">${event.title} ${new Date(event.start_time).toLocaleString()} - ${new Date(event.end_time).toLocaleString()}</p>
+                        <p class="card-header-title">${event.title}<br>${new Date(event.start_time).toLocaleString()} bis<br>${new Date(event.end_time).toLocaleString()}</p>
                         <button class="card-header-icon" aria-label="more options">
                             <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>

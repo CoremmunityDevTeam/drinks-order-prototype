@@ -76,64 +76,58 @@ strong {
 
 
 
+input, select {
+    background-color: #A38463;
+    color: #DFD1C2;
+}
 
+.button {
+    background-color: #654729;
+    color: #ffffff;
+}
 
-    .table td {
-        background-color: #A38463;
-    }
+.button.is-primary {
+    background-color: #654729;
+    border-color: transparent;
+    color: #ffffff; /* Primärer Button Textfarbe */
+}
 
-    input, select {
-        background-color: #A38463;
-        color: #DFD1C2;
-    }
+.button.is-link {
+    background-color: #654729;
+    color: #DFD1C2;
+}
 
-    .button {
-        background-color: #654729;
-        color: #ffffff;
-    }
+.button.is-info {
+    background-color: #654729;
+    color: #654729;
+}
 
-    .button.is-primary {
-        background-color: #654729;
-        border-color: transparent;
-        color: #ffffff; /* Primärer Button Textfarbe */
-    }
+.button.is-success {
+    background-color: #6D5440;
+    color: #ffffff;
+}
 
-    .button.is-link {
-        background-color: #654729;
-        color: #DFD1C2;
-    }
+.button.is-warning {
+    background-color: #654729;
+    color: #ffffff;
+}
 
-    .button.is-info {
-        background-color: #654729;
-        color: #654729;
-    }
+.button.is-danger {
+    background-color: #CFB9A1;
+    color: #654729;
+}
 
-    .button.is-success {
-        background-color: #6D5440;
-        color: #ffffff;
-    }
+.timeline .timeline-marker {
+    background-color: #DFD1C2;
+}
 
-    .button.is-warning {
-        background-color: #654729;
-        color: #ffffff;
-    }
+.timeline .timeline-header, .timeline .timeline-date {
+    color: #DFD1C2;
+}
 
-    .button.is-danger {
-        background-color: #CFB9A1;
-        color: #654729;
-    }
-
-    .timeline .timeline-marker {
-        background-color: #DFD1C2;
-    }
-
-    .timeline .timeline-header, .timeline .timeline-date {
-        color: #DFD1C2;
-    }
-
-    .timeline .timeline-date {
-        background-color: #6D5440;
-    }
+.timeline .timeline-date {
+    background-color: #6D5440;
+}
 
 
 /* Tabellenstile */
@@ -149,6 +143,7 @@ strong {
     background-color: #6D5440;
     padding: 10px;
     border-color: transparent;
+    color: #FFFFFF !important;
 }
 
 .table thead th:first-child {
@@ -201,7 +196,7 @@ strong {
 input, select {
     color: #ffffff;
     background-color: #654729; /* Eingabefelder Hintergrundfarbe */
-    border: 1px solid #ffffff;
+    border: 1px solid #ffffff; 
 }
 
 input::placeholder {
@@ -345,7 +340,7 @@ input::placeholder {
 }
 
 .scrollable-container {
-    overflow-y: scroll;
+    overflow-y: visible;
     height: 70%;
 }
 
@@ -372,9 +367,12 @@ input::placeholder {
     padding: 15px 5px;
 }
 
+
 .table-container {
-    height: calc(100vh - 535px);
-    overflow: scroll;
+    height: auto; /* Ändere die Höhe auf auto */
+    overflow: visible; /* Ändere das Overflow-Verhalten */
+    /*height: calc(100vh - 535px);*/
+    /*overflow: scroll;*/
     margin: 5px 0px;
 }
 
@@ -419,4 +417,12 @@ a {
 }
 #sponsorBackButton {
     margin-top : 30px;
+}
+
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Stelle sicher, dass es über anderen Inhalten bleibt */
+    background-color: inherit; /* Beibehalten der Hintergrundfarbe */
 }
