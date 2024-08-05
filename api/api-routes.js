@@ -20,15 +20,17 @@ function ensureAdmin(req, res, next){
     res.status(403).send('Access denied');
 }
 
+
+// Kann entfernt werden, da auf User umgestellt wurde - K4ninchen 05.08 
 // Route, um das Admin-Passwort zu überprüfen
-router.post('/check-password', (req, res) => {
-    const { password } = req.body;
-    if (password === process.env.ADMIN_PASSWORD) {
-        res.json({ success: true });
-    } else {
-        res.json({ success: false });
-    }
-});
+//router.post('/check-password', (req, res) => {
+//    const { password } = req.body;
+//    if (password === process.env.ADMIN_PASSWORD) {
+//      res.json({ success: true });
+//    } else {
+//        res.json({ success: false });
+//    }
+//});
 
 // Route, um alle Bestellungen eines Benutzers abzurufen
 router.get('/orders', ensureAuthenticated, (req, res) => {
