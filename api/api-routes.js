@@ -31,7 +31,7 @@ async function isRegisteredUser(req)  {
 
 // Middleware zur Überprüfung der Authentifizierung
 async function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated() && (await isRegisteredUser() || await isAdminUser(req))) {
+    if (req.isAuthenticated() && (await isRegisteredUser(req) || await isAdminUser(req))) {
         return next();
     }
     res.redirect('/');
