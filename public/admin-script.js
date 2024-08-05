@@ -117,7 +117,25 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({user_name, user_kind})
         });
 
-        document.getElementById('eventForm').reset();
+        document.getElementById('userForm').reset();
+        loadUsers();
+    });
+
+    document.getElementById('multipleUserForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user_names = document.getElementById('multipleUserNameInput').value;
+
+        await Promise.all(user_names.split('\n').map(
+            async (user_name) => fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({user_name, user_kind: 'Angemeldeter Besucher:in'})
+            })
+        ));
+
+        document.getElementById('multipleUserForm').reset();
         loadUsers();
     });
 
