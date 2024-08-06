@@ -135,3 +135,6 @@ sessions
 
 #Config file
 .env
+
+#Webstorm IDE files
+.idea

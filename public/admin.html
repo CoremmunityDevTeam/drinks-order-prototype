@@ -2,7 +2,7 @@
 <html data-theme="light">
 <head>
     <title>Coremmunity 2024 - Admin</title>
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.json"/>
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
     <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/solid.css">
@@ -11,71 +11,80 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section class="section" id="adminSection">
-        <div class="container">
-            <div class="tabs is-large">
-                <ul>
-                    <li class="is-active" id="eventsTabToogle">
-                        <a>
+<section class="section" id="adminSection">
+    <div class="container">
+        <div class="tabs is-large">
+            <ul>
+                <li class="is-active" id="eventsTabToogle">
+                    <a>
                             <span class="icon">
                                 <i class="fas fa-solid fa-calendar-days"></i>
                             </span>
-                            <span>
+                        <span>
                                 Events
                             </span>
-                        </a>
-                    </li>
-                    <li id="orderTabToogle">
-                        <a>
+                    </a>
+                </li>
+                <li id="orderTabToogle">
+                    <a>
                             <span class="icon">
                                 <i class="fas fa-solid fa-bottle-droplet"></i>
-                            </span>    
-                            <span> Bestellung </span> 
-                        </a>
-                    </li>
-                </ul>
-            </div>          
+                            </span>
+                        <span> Bestellung </span>
+                    </a>
+                </li>
+                <li id="userTabToogle">
+                    <a>
+                            <span class="icon">
+                                <i class="fas fa-solid fa-user"></i>
+                            </span>
+                        <span> Benutzer:innen </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <a class="button is-info is-fullwidth" href="/">                    
+        <a class="button is-info is-fullwidth" href="/">
                 <span class="icon">
                     <i class="fas fa-solid fa-circle-arrow-left"></i>
                 </span>
-                <span>Zurück zur Hauptseite</span>
-            </a>
-            
-            <div id="orderContainer" class="hiddenTab">
-                <h1 class="title">Admin - Getränkebestellung</h1>
-                <div class="field">
-                 <div class="control">
-                        <input class="input" type="text" id="nameFilter" placeholder="Filter nach Name" oninput="loadAllOrders()">
-                    </div>
-                </div>
-               
-                    <div id="adminOrderTable">
-                            <!-- Dynamisch gefüllte Zeilen -->
-                    </div>
-                
-                <div class="stickyAmount">
-                    <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
-                </div>
+            <span>Zurück zur Hauptseite</span>
+        </a>
 
-                <div class="modal" id="orderDeletetionModal">
-                    <div class="modal-background"></div>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                          <p class="modal-card-title">Bestellung löschen</p>
-                          <button class="delete" aria-label="close"></button>
-                        </header>
-                        <section class="modal-card-body">
-                          <span id="orderDeletionText"></span><br>
-                        </section>
-                        <footer class="modal-card-foot">
-                          <div class="buttons">
+        <div id="orderContainer" class="hiddenTab">
+            <h1 class="title">Admin - Getränkebestellung</h1>
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" id="nameFilter" placeholder="Filter nach Name"
+                           oninput="loadAllOrders()">
+                </div>
+            </div>
+
+            <div id="adminOrderTable">
+                <!-- Dynamisch gefüllte Zeilen -->
+            </div>
+
+            <div class="stickyAmount">
+                <p id="totalAmount"><strong>Gesamtsumme: 0.00 €</strong></p>
+            </div>
+
+            <div class="modal" id="orderDeletetionModal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Bestellung löschen</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <span id="orderDeletionText"></span><br>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <div class="buttons">
                             <button class="button is-success" id="orderDeletetionConfirmation">
                                 <span class="icon">
                                     <i class="fas fa-solid fa-cart-shopping"></i>
                                 </span>
-                                <span> Löschen </span>    
+                                <span> Löschen </span>
                             </button>
                             <button class="button is-warning close">
                                 <span class="icon">
@@ -83,78 +92,78 @@
                                 </span>
                                 <span>Abbrechen</span>
                             </button>
-                          </div>
-                        </footer>
-                      </div>
+                        </div>
+                    </footer>
                 </div>
-           
             </div>
-            
-            <div id="eventContainer" class="activeTab">
-                <div class="card">
-                    <header class="card-header">
-                      <p class="card-header-title">Event hinzufügen</p>
-                      <button class="card-header-icon" aria-label="more options">
+
+        </div>
+
+        <div id="eventContainer" class="activeTab">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Event hinzufügen</p>
+                    <button class="card-header-icon" aria-label="more options">
                         <span class="icon">
                           <i class="fas fa-angle-down" aria-hidden="true"></i>
                         </span>
-                      </button>
-                    </header>
-                    <div class="card-content">
-                        <form id="eventForm">
-                            <div class="field">
-                                <label class="label">Titel</label>
-                                <div class="control">
-                                    <input class="input" type="text" id="eventTitle" required>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">Startzeit</label>
-                                <div class="control">
-                                    <input class="input" type="datetime-local" id="eventStartTime" required>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">Endzeit</label>
-                                <div class="control">
-                                    <input class="input" type="datetime-local" id="eventEndTime" required>
-                                </div>
-                            </div>
+                    </button>
+                </header>
+                <div class="card-content">
+                    <form id="eventForm">
+                        <div class="field">
+                            <label class="label">Titel</label>
                             <div class="control">
-                                <button class="button is-primary is-fullwidth" type="submit">
+                                <input class="input" type="text" id="eventTitle" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Startzeit</label>
+                            <div class="control">
+                                <input class="input" type="datetime-local" id="eventStartTime" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Endzeit</label>
+                            <div class="control">
+                                <input class="input" type="datetime-local" id="eventEndTime" required>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary is-fullwidth" type="submit">
                                     <span class="icon">
                                         <i class="fas fa-solid fa-circle-plus"></i>
                                     </span>
-                                    <span>Event hinzufügen</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                                <span>Event hinzufügen</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-                  </div>               
-                  <h1 class="title">Events</h1>
-                  <div class="scrollable-container">
-                    <div id="eventList">
-                        <!-- Dynamisch gefüllte Zeilen -->
-                    </div>
+            </div>
+            <h1 class="title">Events</h1>
+            <div class="scrollable-container">
+                <div id="eventList">
+                    <!-- Dynamisch gefüllte Zeilen -->
+                </div>
 
-                    <div class="modal" id="eventDeletetionModal">
-                        <div class="modal-background"></div>
-                        <div class="modal-card">
-                            <header class="modal-card-head">
-                              <p class="modal-card-title">Event löschen</p>
-                              <button class="delete" aria-label="close"></button>
-                            </header>
-                            <section class="modal-card-body">
-                              <span id="eventDeletionText"></span><br>
-                            </section>
-                            <footer class="modal-card-foot">
-                              <div class="buttons">
+                <div class="modal" id="eventDeletetionModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Event löschen</p>
+                            <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <span id="eventDeletionText"></span><br>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <div class="buttons">
                                 <button class="button is-success" id="eventDeletetionConfirmation">
                                     <span class="icon">
                                         <i class="fas fa-solid fa-cart-shopping"></i>
                                     </span>
-                                    <span> Löschen </span>    
+                                    <span> Löschen </span>
                                 </button>
                                 <button class="button is-warning close">
                                     <span class="icon">
@@ -162,15 +171,122 @@
                                     </span>
                                     <span>Abbrechen</span>
                                 </button>
-                              </div>
-                            </footer>
-                          </div>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </div>
-        </div>    
-    </section>
+        </div>
 
-    <script src="admin-script.js"></script>
+        <div id="userContainer" class="hiddenTab">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Benutzer:in hinzufügen</p>
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                          <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </header>
+                <div class="card-content">
+                    <form id="userForm">
+                        <div class="field">
+                            <label class="label" for="userNameInput">Twitch Nutzername</label>
+                            <div class="control">
+                                <input class="input" type="text" id="userNameInput" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="userKindInput">Typ</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select id="userKindInput" required>
+                                        <option>Angemeldeter Besucher:in</option>
+                                        <option>Administrator</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary is-fullwidth" type="submit">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-circle-plus"></i>
+                                    </span>
+                                <span>Benutzer:in hinzufügen</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Mehrere Benutzer:innen hinzufügen (einer pro Zeile)</p>
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                          <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </header>
+                <div class="card-content">
+                    <form id="multipleUserForm">
+                        <div class="field">
+                            <label class="label" for="multipleUserNameInput">Twitch Nutzernamen (einer pro
+                                Zeile)</label>
+                            <div class="control">
+                                <textarea class="textarea" id="multipleUserNameInput" required></textarea>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary is-fullwidth" type="submit">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-circle-plus"></i>
+                                    </span>
+                                <span>Benutzer:innen hinzufügen</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <h1 class="title">Admin - Benutzer:innen</h1>
+            <div class="scrollable-container">
+                <div id="userList">
+                    <!-- Dynamisch gefüllte Zeilen -->
+                </div>
+
+                <div class="modal" id="userDeletetionModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Benutzer:in löschen</p>
+                            <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <span id="userDeletionText"></span><br>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <div class="buttons">
+                                <button class="button is-success" id="userDeletetionConfirmation">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-cart-shopping"></i>
+                                    </span>
+                                    <span> Löschen </span>
+                                </button>
+                                <button class="button is-warning close">
+                                    <span class="icon">
+                                        <i class="fas fa-solid fa-xmark"></i>
+                                    </span>
+                                    <span>Abbrechen</span>
+                                </button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="admin-script.js"></script>
 </body>
 </html>

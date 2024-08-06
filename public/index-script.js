@@ -10,12 +10,24 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadUsername() {
         const response = await fetch('/api/get-username');
         const data = await response.json();
+
+        const registered =  data.registeredUser || data.admin
+
+        if(data.username && !(registered)) {
+            document.getElementById('welcomeMessage').innerHTML = `Nicht zugelassener Benutzer:in`;
+            document.getElementById('loginButton').style.display = 'none';
+            document.getElementById('orderButton').style.display = 'none';
+            document.getElementById('adminButton').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'block';
+            return;
+        }
+
+
         if (data.username) {
             document.getElementById('welcomeMessage').innerHTML = `Willkommen, ${data.username}`;
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('orderButton').style.display = 'block';
             document.getElementById('logoutButton').style.display = 'block';
-            
         } else {
             document.getElementById('welcomeMessage').innerHTML = '';
             document.getElementById('loginButton').style.display = 'block';
@@ -29,9 +41,27 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.getElementById('adminButton').style.display = 'none';
         }
+
+        return registered || false;
     }
-    loadUsername();
-    loadEventDates()
+
+    async function loadAccessCode() {
+        const response = await fetch('/api/accessCode');
+        const data = await response.json();
+        if(data?.accessCode) {
+            document.getElementById('accessCode').innerHTML = `Zugangscode: ${data.accessCode}`;
+        }
+
+    }
+    loadUsername().then(registed => {
+        console.log("Registerd: " + registed);
+        if(registed) {
+        loadAccessCode();
+        }
+    });
+
+    loadEventDates();
+   
 
     async function loadEventDates() {
         const response = await fetch('/api/events/date');
