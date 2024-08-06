@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const response = await fetch('/api/get-username');
         const data = await response.json();
 
-        if(data.username && !(data.registeredUser || data.admin)) {
+        const registered =  data.registeredUser || data.admin
+
+        if(data.username && !(registered)) {
             document.getElementById('welcomeMessage').innerHTML = `Nicht zugelassener Benutzer:in`;
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('orderButton').style.display = 'none';
@@ -39,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.getElementById('adminButton').style.display = 'none';
         }
+
+        return registered || false;
     }
 
     async function loadAccessCode() {
@@ -49,9 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
     }
-    loadUsername();
+    loadUsername().then(registed => {
+        console.log("Registerd: " + registed);
+        if(registed) {
+        loadAccessCode();
+        }
+    });
+
     loadEventDates();
-    loadAccessCode();
+   
 
     async function loadEventDates() {
         const response = await fetch('/api/events/date');
