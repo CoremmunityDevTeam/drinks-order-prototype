@@ -40,6 +40,7 @@ Dies ist eine einfache Webanwendung zur Verwaltung von Getränkebestellungen. Di
    SESSION_SECRET="<Custom Session Secret not from Twitch>"
    PAYPAL_LINK="<Link to PaypalMe to the payment of the drinks>"
    ADMIN_USERS="Comma seperated list of twitch usernames which should get access to the admin pages"
+   ACCESS_CODE="<Access Code>"
    ```
 
 ## Anwendung starten
