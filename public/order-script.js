@@ -86,7 +86,6 @@ async function loadOrders() {
     let total = 0;
     orders.reverse().forEach(order => {  // Reverse the order of orders
         total += order.price;
-        console.log(order)
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${order.drink}</td>
