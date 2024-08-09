@@ -10,7 +10,7 @@ const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'),{ maxAge: '1d' }));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use(session({
     secret: process.env.SESSION_SECRET,
