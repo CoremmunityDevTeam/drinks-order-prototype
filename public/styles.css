@@ -426,3 +426,15 @@ a {
     z-index: 10; /* Stelle sicher, dass es über anderen Inhalten bleibt */
     background-color: inherit; /* Beibehalten der Hintergrundfarbe */
 }
+
+@media screen and (max-width: 768px) {
+    .tab-name {
+        display: none;
+    }
+    .tab-icon {
+        left: 50%;
+        position: relative;
+        transform: translate(-50%, 0);
+    }
+}
+

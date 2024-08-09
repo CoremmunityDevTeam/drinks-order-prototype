@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const eventDateTabs = document.getElementById('event-dates');
         eventDateTabs.innerHTML = '';
 
+        const displayDateFormat = {month: '2-digit', day: 'numeric' };
         const dateFormat = {year: 'numeric', month: '2-digit', day: 'numeric' };
         const currentDate = new Date().toLocaleDateString('DE-de',dateFormat);
         var hasCurrentDate = false;
