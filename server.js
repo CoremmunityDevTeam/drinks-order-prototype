@@ -1,5 +1,6 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname + "/.env") });
+const compression = require('compression');
 const express = require('express');
 const session = require('express-session');
 const { initAuthentication } = require('./auth/config');
@@ -18,6 +19,7 @@ app.use(session({
     store: new SQLiteStore({dir: path.resolve(__dirname)}),
     cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
 }));
+app.use(compression())
 
 // Passport initialisieren
 initAuthentication(app);
