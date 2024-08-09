@@ -122,7 +122,7 @@ router.get('/get-username', async (req, res) => {
 
 // Route, um alle Events abzurufen
 router.get('/events/date', (req,res) => {
-    db.all("SELECT distinct STRFTIME('%d.%m', start_time) as date, STRFTIME('%d-%m-%Y', start_time) as search FROM events order by start_time asc", (err, rows) => {
+    db.all("SELECT distinct STRFTIME('%d.%m.', start_time) as date, STRFTIME('%d-%m-%Y', start_time) as search FROM events order by start_time asc", (err, rows) => {
         if (err){
             res.status(500).json({error: err.message})
             return;
