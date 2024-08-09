@@ -1,6 +1,6 @@
 {
     "name": "Coremmunity - 2024",
-    "start_url": "http://localhost:3000/",
+    "start_url": "https://coremmunity.space/",
     "display": "fullscreen",
     "prefer_related_applications" : false,
     "icons": [
