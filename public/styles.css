@@ -427,6 +427,10 @@ a {
     background-color: inherit; /* Beibehalten der Hintergrundfarbe */
 }
 
+.sticky-container {
+    padding-bottom: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .tab-name {
         display: none;
@@ -437,4 +441,5 @@ a {
         transform: translate(-50%, 0);
     }
 }
+
 

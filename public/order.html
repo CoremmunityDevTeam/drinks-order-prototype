@@ -14,44 +14,64 @@
     <div class="background-container blurry-bg"></div> 
     <div class="content-container" id="contentSection">
         <section class="section">
-                <h1 class="title">Getränkebestellung</h1>
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control">
-                        <p id="name" class="is-size-4 has-text-weight-bold"></p>
+                <div class="sticky-container">
+                    <h1 class="title">Getränkebestellung</h1>
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <p id="name" class="is-size-4 has-text-weight-bold"></p>
+                        </div>
                     </div>
-                </div>
-                <form id="orderForm">
-                    <div class="columns is-mobile is-multiline">
-                        <div class="column is-full-mobile">
-                            <div class="field">
-                                <label class="label">Getränk</label>
-                                <div class="control">
-                                    <div class="select is-fullwidth">
-                                        <select id="drink">
-                                            <option value="Bier">Bier - 1.80€</option>
-                                            <option value="Softgetränk">Softgetränk - 2.50€</option>
-                                            <option value="Wasser">Wasser - 1.20€</option>
-                                        </select>
+                    <a class="button is-transparent is-fullwidth" href="/">
+                        <span class="icon">
+                            <i class="fas fa-solid fa-circle-arrow-left"></i>
+                        </span>
+                        <span>Zurück</span>
+                    </a>
+                    </br>
+                    <a id="checkout" class="button is-transparent is-fullwidth">
+                        <span class="icon">
+                            <i class="fas fa-brands fa-paypal"></i>
+                        </span>
+                        <span>Bezahlen</span>
+                    </a>
+                    </br>
+                    <p id="totalAmount"><strong>Summe: 0.00 €</strong></p><br>
+                    
+                    <form id="orderForm">
+                        <div class="columns is-mobile is-multiline">
+                            <div class="column is-full-mobile">
+                                <div class="field">
+                                    <label class="label">Getränk</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select id="drink">
+                                                <option value="Bier">Bier - 1.80€</option>
+                                                <option value="Softgetränk">Softgetränk - 2.50€</option>
+                                                <option value="Wasser">Wasser - 1.20€</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-full-mobile">
+                                <div class="field">
+                                    <div class="control" style="margin-top: 32px;">
+                                        <button class="button is-transparent is-fullwidth" type="submit" id="submitButton">
+                                            <span class="icon">
+                                                <i class="fas fa-solid fa-cart-shopping"></i>
+                                            </span>
+                                            <span> Bestellen </span>    
+                                            
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-full-mobile">
-                            <div class="field">
-                                <div class="control" style="margin-top: 32px;">
-                                    <button class="button is-primary is-fullwidth" type="submit" id="submitButton">
-                                        <span class="icon">
-                                            <i class="fas fa-solid fa-cart-shopping"></i>
-                                        </span>
-                                        <span> Bestellen </span>    
-                                        
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
+
                 <div class="table-container">
                     <table class="table is-fullwidth" id="orderTable">
                         <thead>
@@ -66,7 +86,7 @@
                         </tbody>
                     </table>
                 </div>
-                <p id="totalAmount"><strong>Summe: 0.00 €</strong></p><br>
+               
 
                 <div class="modal" id="orderConfirmation">
                     <div class="modal-background"></div>
@@ -129,22 +149,7 @@
                           </div>
                         </footer>
                       </div>
-                </div>
-
-
-                <a id="checkout" class="button is-success is-fullwidth">
-                    <span class="icon">
-                        <i class="fas fa-brands fa-paypal"></i>
-                    </span>
-                    <span>Bezahlen</span>
-                </a>  
-            </br>
-                <a class="button is-info is-fullwidth" href="/">
-                    <span class="icon">
-                        <i class="fas fa-solid fa-circle-arrow-left"></i>
-                    </span>
-                    <span>Zurück</span>
-                </a>          
+                </div>          
         </section>
     </div>
     <script src="order-script.js"></script>
