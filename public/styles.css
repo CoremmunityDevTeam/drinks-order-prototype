@@ -442,4 +442,26 @@ a {
     }
 }
 
+.info-box {
+    position: absolute;
+    display: block;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:none;
+}
+
+.info-box .delete {
+    right: 15px;
+    position: absolute;
+}
+
+.info-box .message-header {
+    background-color: #6D5440;
+}
+
+.info-box .devs {
+  margin: 10px 5px;
+}
 

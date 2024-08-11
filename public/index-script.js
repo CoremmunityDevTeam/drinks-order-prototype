@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
     loadUsername().then(registed => {
-        console.log("Registerd: " + registed);
         if(registed) {
         loadAccessCode();
         }
@@ -171,7 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
         hideSection('contentContainer');
     });
 
+
+    document.getElementById('close-info-box').addEventListener('click', function()  {
+        console.log("Close info box");
+        document.getElementById('info-box').style.display = 'none';
+    });
+
     document.getElementById('infoButton').addEventListener('click', function() {
-        alert('Vielen Dank an alle, die an coremmunity mitgewirkt haben, insbesondere an:\n\n- Bomwald\n- K4ninchen\n- Techlogic\n\n und das OrgaTeam.');
+        document.getElementById('info-box').style.display = 'block';
     });
 });
