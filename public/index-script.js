@@ -170,4 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('backButton').addEventListener('click', function() {
         hideSection('contentContainer');
     });
+
+    document.getElementById('infoButton').addEventListener('click', function() {
+        alert('Vielen Dank an alle, die an coremmunity mitgewirkt haben, insbesondere an:\n\n- Bomwald\n- K4ninchen\n- Techlogic\n\n und das OrgaTeam.');
+    });
 });
