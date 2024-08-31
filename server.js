@@ -17,7 +17,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new SQLiteStore({dir: path.resolve(__dirname)}),
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 1 month
 }));
 app.use(compression())
 
