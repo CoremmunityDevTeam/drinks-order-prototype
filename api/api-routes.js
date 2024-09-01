@@ -3,7 +3,7 @@ const db = require('../database');
 
 async function isUserOfType(user_name, type) {
     return new Promise((resolve, reject) => {
-        db.all(`SELECT user_name FROM users WHERE user_name = ? AND user_kind = ?`, [user_name, type], (err, rows) => {
+        db.all(`SELECT user_name FROM users WHERE user_name = ? AND user_kind = ?`, [user_name.trim(), type], (err, rows) => {
             if(err) {
                 reject();
             }
@@ -188,7 +188,7 @@ router.get('/users', (req, res) => {
 
 router.post('/users', ensureAdmin, (req, res) => {
     const { user_name, user_kind } = req.body;
-    db.run('INSERT INTO users (user_name, user_kind) VALUES (?, ?)', [user_name, user_kind], function (err) {
+    db.run('INSERT INTO users (user_name, user_kind) VALUES (?, ?)', [user_name.trim(), user_kind], function (err) {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
