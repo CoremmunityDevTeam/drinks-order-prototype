@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const registered =  data.registeredUser || data.admin
 
         if(data.username && !(registered)) {
-            document.getElementById('welcomeMessage').innerHTML = `Nicht zugelassener Benutzer:in`;
+            document.getElementById('welcomeMessage').innerHTML = `Willkommen, ${data.username}`;
+            document.getElementById('accessCode').innerHTML = `Nicht zugelassener Benutzer:in`;
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('orderButton').style.display = 'none';
             document.getElementById('adminButton').style.display = 'none';
