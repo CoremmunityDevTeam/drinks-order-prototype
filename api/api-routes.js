@@ -3,7 +3,7 @@ const db = require('../database');
 
 async function isUserOfType(user_name, type) {
     return new Promise((resolve, reject) => {
-        db.all(`SELECT user_name FROM users WHERE user_name = ? AND user_kind = ?`, [user_name.trim(), type], (err, rows) => {
+        db.all(`SELECT user_name FROM users WHERE trim(lower(user_name)) = trim(lower(?)) AND user_kind = ?`, [user_name, type], (err, rows) => {
             if(err) {
                 reject();
             }
